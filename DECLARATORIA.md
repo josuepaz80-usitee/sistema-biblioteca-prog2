@@ -20,20 +20,53 @@ Declaramos que el presente proyecto fue desarrollado con el apoyo de **inteligen
 
 ---
 
-## 2. Contenido enseñado en clase (Semana 12)
+## 2. Contenido enseñado en clase (todo el semestre)
 
-El docente Ing. Bryan Vélez explicó y demostró en vivo los siguientes temas durante la clase del 6 de julio de 2026:
+Los siguientes temas fueron enseñados por el Ing. Bryan Vélez durante las clases del semestre y constan en los apuntes y materiales del Grupo #1:
 
-| Tema | Cubierto en clase |
-|------|-------------------|
-| Conexión a SQLite (`import sqlite3`, `sqlite3.connect()`) | ✅ Demostración en vivo |
-| Creación de tablas (`CREATE TABLE IF NOT EXISTS`) | ✅ Demostración en vivo |
-| Inserción de datos con parámetros posicionales `(?, ?)` | ✅ Demostración en vivo |
-| Cursor y ejecución de consultas (`cursor.execute()`) | ✅ Demostración en vivo |
-| Commit y cierre de conexión (`commit()`, `close()`) | ✅ Demostración en vivo |
-| SELECT y fetchall (`cursor.fetchall()`) | ✅ Demostración en vivo |
-| Uso de DB Browser for SQLite | ✅ Demostración en vivo |
-| Concepto de Tkinter para GUI | ✅ Mencionado (no demostrado) |
+### 2.1 Programación Orientada a Objetos (Semanas 8-11)
+
+| Tema | Cubierto en clase | Material de referencia |
+|------|:-----------------:|------------------------|
+| Clases y objetos (`class`, `__init__`) | ✅ Enseñado | `leccion_henry_pazmino.py` |
+| Herencia simple (`class Hija(Padre)`) | ✅ Enseñado | Clase 4-may — `registro-clases/herencia-simple.md` |
+| `super()` para constructor del padre | ✅ Enseñado | Clase 4-may — `registro-clases/metodo-super.md` |
+| Herencia múltiple y MRO | ✅ Enseñado | Clase 4-may — `registro-clases/herencia-multiple-mro.md` |
+| Sobreescritura de métodos | ✅ Enseñado | Clase 4-may — `registro-clases/sobreescritura-metodos.md` |
+| Encapsulamiento (`self.__atributo` + getters) | ✅ Enseñado | Clase 11-may — `leccion_henry_pazmino.py` |
+| Abstracción (`ABC` / `@abstractmethod` / `raise NotImplementedError`) | ✅ Enseñado | Clase 11-may — `leccion_henry_pazmino.py` |
+| Polimorfismo (mismo método, distinto comportamiento) | ✅ Enseñado | Clase 11-may — `capturas/polimorfismo_ejemplo_11may.md` |
+
+### 2.2 Estructuras de Datos (Semana 10)
+
+| Tema | Cubierto en clase | Material de referencia |
+|------|:-----------------:|------------------------|
+| Pilas (Stack LIFO) — concepto e implementación | ✅ Enseñado | Clase 1-jun — `capturas/pila-stack-python.md` |
+| Colas (Queue FIFO) — concepto e implementación | ✅ Enseñado | Clase 1-jun — `capturas/cola-queue-python.md` |
+| Aplicaciones de pilas y colas en la vida real | ✅ Enseñado | Clase 1-jun — `capturas/comparacion-aplicaciones.md` |
+
+### 2.3 Algoritmos de Ordenamiento y Búsqueda (Semana 11)
+
+| Tema | Cubierto en clase | Material de referencia |
+|------|:-----------------:|------------------------|
+| Bubble Sort — traza manual paso a paso | ✅ Enseñado | Clase 3-jul — `resumen-clase-prog2-semana11.md` |
+| Selection Sort | ✅ Enseñado | Exposición Grupo #1 |
+| Insertion Sort | ✅ Enseñado | Exposición Grupo #1 |
+| Búsqueda lineal | ✅ Enseñado | Taller 11 — `resumen-clase-prog2-semana11.md` |
+| Búsqueda binaria | ✅ Enseñado | Taller 11 — `resumen-clase-prog2-semana11.md` |
+
+### 2.4 Base de Datos y Proyecto (Semana 12)
+
+| Tema | Cubierto en clase | Material de referencia |
+|------|:-----------------:|------------------------|
+| Conexión a SQLite (`import sqlite3`, `sqlite3.connect()`) | ✅ Demostración en vivo | Clase 6-jul — video Semana 12 |
+| Creación de tablas (`CREATE TABLE IF NOT EXISTS`) | ✅ Demostración en vivo | Clase 6-jul — video Semana 12 |
+| Inserción con parámetros posicionales `(?, ?)` | ✅ Demostración en vivo | Clase 6-jul — video Semana 12 |
+| Cursor y ejecución de consultas (`cursor.execute()`) | ✅ Demostración en vivo | Clase 6-jul — video Semana 12 |
+| Commit y cierre de conexión (`commit()`, `close()`) | ✅ Demostración en vivo | Clase 6-jul — video Semana 12 |
+| SELECT y fetchall (`cursor.fetchall()`) | ✅ Demostración en vivo | Clase 6-jul — video Semana 12 |
+| Uso de DB Browser for SQLite | ✅ Demostración en vivo | Clase 6-jul — video Semana 12 |
+| Concepto de Tkinter para GUI | ✅ Mencionado (no demostrado) | Clase 6-jul — video Semana 12 |
 
 ---
 
@@ -41,16 +74,7 @@ El docente Ing. Bryan Vélez explicó y demostró en vivo los siguientes temas d
 
 A continuación se detalla cada tema que **no fue demostrado explícitamente en clase** pero que fue requerido por el proyecto y por tanto investigado por el grupo.
 
-### 3.1 Programación Orientada a Objetos (clases, encapsulamiento, herencia, polimorfismo, abstracción)
-
-**Referencia:**
-> Joyanes Aguilar, L. (2020). *Programación orientada a objetos con Python*. McGraw-Hill Interamericana. ISBN: 978-607-15-1548-9.
-
-**Lo que dice la referencia:** La POO se basa en cuatro pilares fundamentales: encapsulamiento (ocultar datos mediante atributos privados y métodos de acceso), herencia (crear clases derivadas que reutilizan código de clases base), polimorfismo (un mismo método se comporta distinto según la clase que lo implementa) y abstracción (definir clases abstractas que no pueden instanciarse directamente).
-
-**Aplicación en el proyecto:** Se diseñó una clase abstracta `Persona` de la cual heredan `Estudiante` y `Docente`. El encapsulamiento se aplicó mediante convención de atributos privados (`__atributo`) con métodos getter/setter. El polimorfismo se aplicó mediante el método `tipo_socio()` que retorna distinto valor según la subclase.
-
-### 3.2 Lista enlazada simple
+### 3.1 Lista enlazada simple
 
 **Referencia:**
 > Weiss, M. A. (2013). *Estructuras de datos y algoritmos* (4ª ed.). Pearson Educación. ISBN: 978-0-273-76834-2.
@@ -59,47 +83,20 @@ A continuación se detalla cada tema que **no fue demostrado explícitamente en 
 
 **Aplicación en el proyecto:** Se implementó una lista enlazada simple (`LinkedList`) para el catálogo dinámico de libros. Cada nodo almacena un libro y apunta al siguiente, permitiendo agregar y eliminar libros sin límite de tamaño predefinido.
 
-### 3.3 Cola (Queue) — estructura FIFO
-
-**Referencia:**
-> Cairo, O., & Guardati, S. (2006). *Estructuras de datos* (3ª ed.). McGraw-Hill Interamericana. ISBN: 978-970-10-5856-9.
-
-**Lo que dice la referencia:** Una cola es una estructura FIFO (First In, First Out) donde el primer elemento en entrar es el primero en salir. Se usa para gestionar procesos por orden de llegada.
-
-**Aplicación en el proyecto:** Se implementó una cola (`Queue`) para gestionar las reservas de libros no disponibles. Cuando un libro está prestado, los socios pueden reservarlo y se atienden por orden de llegada.
-
-### 3.4 Pila (Stack) — estructura LIFO
-
-**Referencia:**
-> Cairo, O., & Guardati, S. (2006). *Estructuras de datos* (3ª ed.). McGraw-Hill Interamericana. ISBN: 978-970-10-5856-9.
-
-**Lo que dice la referencia:** Una pila es una estructura LIFO (Last In, First Out) donde el último elemento en entrar es el primero en salir. Se usa para deshacer operaciones (undo) y para registros de historial.
-
-**Aplicación en el proyecto:** Se implementó una pila (`Stack`) para almacenar el historial de préstamos/devoluciones y permitir deshacer la última operación registrada por el bibliotecario.
-
-### 3.5 Algoritmos de ordenamiento (Burbuja, Inserción, Merge Sort, Quick Sort)
+### 3.2 Algoritmos de ordenamiento avanzados (Merge Sort, Quick Sort)
 
 **Referencia:**
 > Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). *Introduction to algorithms* (3rd ed.). MIT Press. ISBN: 978-0-262-03384-8.
 
 **Lo que dice la referencia:**
-- **Burbuja (O(n²)):** Recorre la lista comparando pares adyacentes e intercambiándolos si están en orden incorrecto. Es el más simple pero ineficiente para grandes volúmenes.
-- **Inserción (O(n²)):** Construye la lista ordenada insertando cada elemento en su posición correcta. Eficiente para listas parcialmente ordenadas.
 - **Merge Sort (O(n log n)):** Divide la lista en mitades, las ordena recursivamente y las fusiona. Es estable y predecible.
 - **Quick Sort (O(n log n) promedio):** Selecciona un pivote y particiona la lista en elementos menores y mayores. Es rápido en la práctica.
 
-**Aplicación en el proyecto:** Se implementaron estos cuatro algoritmos para ordenar el catálogo de libros por título, autor, año, etc. El programa permite al usuario elegir qué algoritmo usar y visualizar las diferencias.
+**Aplicación en el proyecto:** Se implementaron ambos algoritmos para ordenar el catálogo de libros por título, autor, año, etc. El programa permite al usuario elegir qué algoritmo usar.
 
-### 3.6 Búsqueda lineal y búsqueda binaria
+*Nota: Los algoritmos básicos (Burbuja, Selección, Inserción) y de búsqueda (lineal, binaria) fueron enseñados en clase durante la Semana 11 y la exposición del Grupo #1.*
 
-**Referencia:**
-> Joyanes Aguilar, L. (2020). *Programación orientada a objetos con Python*. McGraw-Hill Interamericana. ISBN: 978-607-15-1548-9.
-
-**Lo que dice la referencia:** La búsqueda lineal recorre elemento por elemento (O(n)). La búsqueda binaria divide el espacio de búsqueda a la mitad en cada paso (O(log n)), pero requiere datos ordenados.
-
-**Aplicación en el proyecto:** Se implementaron ambos algoritmos para buscar libros por ISBN, título o autor. La búsqueda binaria se aplica sobre el catálogo previamente ordenado.
-
-### 3.7 Interfaz gráfica con Tkinter
+### 3.3 Interfaz gráfica con Tkinter
 
 **Referencia:**
 > Grayson, J. E. (2000). *Python and Tkinter programming*. Manning Publications. ISBN: 978-1-884777-81-3.
@@ -108,14 +105,15 @@ A continuación se detalla cada tema que **no fue demostrado explícitamente en 
 
 **Aplicación en el proyecto:** Se desarrolló la interfaz gráfica del sistema usando Tkinter, con menús desplegables, formularios de entrada, tablas de visualización y cuadros de diálogo.
 
-### 3.8 Operaciones CRUD en SQLite
+### 3.4 Operaciones CRUD completas en SQLite (UPDATE, DELETE)
 
 **Referencia:**
 > Kreibich, J. A. (2010). *Using SQLite*. O'Reilly Media. ISBN: 978-0-596-52118-9.
 
 **Lo que dice la referencia:** CRUD (Create, Read, Update, Delete) son las cuatro operaciones básicas de persistencia en bases de datos. SQLite es un motor de base de datos embebido que no requiere servidor, ideal para aplicaciones de escritorio.
 
-**Aplicación en el proyecto:** Se implementaron operaciones CRUD completas para las tablas de socios y libros, siguiendo exactamente el patrón `INSERT → SELECT → UPDATE → DELETE` que el docente demostró en clase.
+**Aplicación en el proyecto:** Se implementaron operaciones CRUD completas para las tablas de socios y libros.
+*Nota: Las operaciones INSERT y SELECT fueron enseñadas en clase. UPDATE y DELETE fueron investigadas para completar el CRUD.*
 
 ---
 
