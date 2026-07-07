@@ -28,13 +28,13 @@ Los siguientes temas fueron enseñados por el Ing. Bryan Vélez durante las clas
 
 | Tema | Cubierto en clase | Material de referencia |
 |------|:-----------------:|------------------------|
-| Clases y objetos (`class`, `__init__`) | ✅ Enseñado | `leccion_henry_pazmino.py` |
+| Clases y objetos (`class`, `__init__`) | ✅ Enseñado | Apuntes de clase — Semana 8 |
 | Herencia simple (`class Hija(Padre)`) | ✅ Enseñado | Clase 4-may — `registro-clases/herencia-simple.md` |
 | `super()` para constructor del padre | ✅ Enseñado | Clase 4-may — `registro-clases/metodo-super.md` |
 | Herencia múltiple y MRO | ✅ Enseñado | Clase 4-may — `registro-clases/herencia-multiple-mro.md` |
 | Sobreescritura de métodos | ✅ Enseñado | Clase 4-may — `registro-clases/sobreescritura-metodos.md` |
-| Encapsulamiento (`self.__atributo` + getters) | ✅ Enseñado | Clase 11-may — `leccion_henry_pazmino.py` |
-| Abstracción (`ABC` / `@abstractmethod` / `raise NotImplementedError`) | ✅ Enseñado | Clase 11-may — `leccion_henry_pazmino.py` |
+| Encapsulamiento (`self.__atributo` + getters) | ✅ Enseñado | Clase 11-may — material de la unidad |
+| Abstracción (`ABC` / `@abstractmethod` / `raise NotImplementedError`) | ✅ Enseñado | Clase 11-may — material de la unidad |
 | Polimorfismo (mismo método, distinto comportamiento) | ✅ Enseñado | Clase 11-may — `capturas/polimorfismo_ejemplo_11may.md` |
 
 ### 2.2 Estructuras de Datos (Semana 10)
