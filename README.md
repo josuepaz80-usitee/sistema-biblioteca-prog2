@@ -37,8 +37,18 @@ sistema-biblioteca-prog2/
 └── main.py                # Punto de entrada
 ```
 
+## Documentación Académica
+
+📄 **`DECLARATORIA.md`** — Documento obligatorio que declara:
+- Uso de IA como herramienta de apoyo
+- Contenido enseñado en clase (Semana 12) vs. contenido investigado
+- **Referencias APA 7ª edición** para cada tema investigado (POO, estructuras, algoritmos, BD, GUI)
+- Justificación académica de cada concepto aplicado
+
+> ⚠️ **Nota académica:** Todo el código sigue el estilo de programación enseñado por el Ing. Bryan Vélez en clase: comentarios `# PASO #N`, encapsulamiento con getters/setters, herencia simple, polimorfismo, y estructura paso a paso. Los temas no cubiertos en clase están señalados en la DECLARATORIA con sus referencias APA.
+
 ## Miembros del Grupo
-- Henry Pazmiño
+- Henry Pazmiño (Líder)
 - Jodie Parrales
 - Cindy Ayoví
 - Cesar Gonzales

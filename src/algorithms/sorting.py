@@ -1,107 +1,89 @@
-"""Algoritmos de ordenamiento"""
+# ALGORITMOS DE ORDENAMIENTO
+# Investigacion: Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009).
+# Introduction to algorithms (3rd ed.). MIT Press.
 
-# Ordenamiento Básico: Burbuja
-def bubble_sort(arr, key=None, reverse=False):
-    """
-    Ordenamiento Burbuja O(n²)
-    Intercambia elementos adyacentes si están en orden incorrecto
-    """
-    n = len(arr)
-    if key is None:
-        key_func = lambda x: x
-    else:
-        key_func = key
 
-    result = list(arr)
+# ORDENAMIENTO BASICO 1: Burbuja (O(n^2))
+# Compara pares adyacentes y los intercambia si estan en orden incorrecto
+def bubble_sort(lista):
+    n = len(lista)
+    resultado = lista[:]  # Copia de la lista original
     for i in range(n):
         for j in range(0, n - i - 1):
-            a = key_func(result[j])
-            b = key_func(result[j + 1])
-            if (a > b) if not reverse else (a < b):
-                result[j], result[j + 1] = result[j + 1], result[j]
-    return result
+            if resultado[j] > resultado[j + 1]:
+                resultado[j], resultado[j + 1] = resultado[j + 1], resultado[j]
+    return resultado
 
 
-# Ordenamiento Básico: Inserción
-def insertion_sort(arr, key=None, reverse=False):
-    """
-    Ordenamiento por Inserción O(n²)
-    Construye la salida insertando cada elemento en su posición correcta
-    """
-    if key is None:
-        key_func = lambda x: x
-    else:
-        key_func = key
-
-    result = list(arr)
-    for i in range(1, len(result)):
-        temp = result[i]
+# ORDENAMIENTO BASICO 2: Insercion (O(n^2))
+# Inserta cada elemento en su posicion correcta dentro de la parte ordenada
+def insertion_sort(lista):
+    resultado = lista[:]
+    for i in range(1, len(resultado)):
+        temp = resultado[i]
         j = i - 1
-        while j >= 0:
-            a = key_func(result[j])
-            b = key_func(temp)
-            if (a > b) if not reverse else (a < b):
-                result[j + 1] = result[j]
-                j -= 1
-            else:
-                break
-        result[j + 1] = temp
-    return result
+        while j >= 0 and resultado[j] > temp:
+            resultado[j + 1] = resultado[j]
+            j -= 1
+        resultado[j + 1] = temp
+    return resultado
 
 
-# Ordenamiento Avanzado: Merge Sort O(n log n)
-def merge_sort(arr, key=None, reverse=False):
-    """Merge Sort - Divide y vencerás O(n log n)"""
-    if key is None:
-        key_func = lambda x: x
-    else:
-        key_func = key
+# ORDENAMIENTO AVANZADO 1: Merge Sort (O(n log n))
+# Divide la lista en mitades, ordena cada una y las fusiona
+def merge_sort(lista):
+    if len(lista) <= 1:
+        return lista
 
-    def merge(left, right):
-        result = []
-        i = j = 0
-        while i < len(left) and j < len(right):
-            if (key_func(left[i]) <= key_func(right[j])) if not reverse else (key_func(left[i]) >= key_func(right[j])):
-                result.append(left[i])
-                i += 1
-            else:
-                result.append(right[j])
-                j += 1
-        result.extend(left[i:])
-        result.extend(right[j:])
-        return result
+    medio = len(lista) // 2
+    izquierda = merge_sort(lista[:medio])
+    derecha = merge_sort(lista[medio:])
 
-    def msort(items):
-        if len(items) <= 1:
-            return items
-        mid = len(items) // 2
-        left = msort(items[:mid])
-        right = msort(items[mid:])
-        return merge(left, right)
-
-    return msort(list(arr))
+    return _merge(izquierda, derecha)
 
 
-# Ordenamiento Avanzado: Quick Sort O(n log n) promedio
-def quick_sort(arr, key=None, reverse=False):
-    """Quick Sort - Divide y vencerás con pivote O(n log n) promedio"""
-    if key is None:
-        key_func = lambda x: x
-    else:
-        key_func = key
+def _merge(izquierda, derecha):
+    """Funcion auxiliar que fusiona dos listas ordenadas"""
+    resultado = []
+    i = 0
+    j = 0
 
-    def qsort(items):
-        if len(items) <= 1:
-            return items
-        pivot = items[len(items) // 2]
-        p_val = key_func(pivot)
-        if not reverse:
-            left = [x for x in items if key_func(x) < p_val]
-            right = [x for x in items if key_func(x) > p_val]
+    while i < len(izquierda) and j < len(derecha):
+        if izquierda[i] <= derecha[j]:
+            resultado.append(izquierda[i])
+            i += 1
         else:
-            left = [x for x in items if key_func(x) > p_val]
-            right = [x for x in items if key_func(x) < p_val]
-        middle = [x for x in items if key_func(x) == p_val]
-        return qsort(left) + middle + qsort(right)
+            resultado.append(derecha[j])
+            j += 1
 
-    return qsort(list(arr))
+    # Agrega los elementos restantes
+    while i < len(izquierda):
+        resultado.append(izquierda[i])
+        i += 1
+    while j < len(derecha):
+        resultado.append(derecha[j])
+        j += 1
+
+    return resultado
+
+
+# ORDENAMIENTO AVANZADO 2: Quick Sort (O(n log n) promedio)
+# Selecciona un pivote y particiona en menores y mayores
+def quick_sort(lista):
+    if len(lista) <= 1:
+        return lista
+
+    pivote = lista[len(lista) // 2]
+    izquierda = []
+    centro = []
+    derecha = []
+
+    for x in lista:
+        if x < pivote:
+            izquierda.append(x)
+        elif x == pivote:
+            centro.append(x)
+        else:
+            derecha.append(x)
+
+    return quick_sort(izquierda) + centro + quick_sort(derecha)

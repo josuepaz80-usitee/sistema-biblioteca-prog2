@@ -1,43 +1,54 @@
-"""Capa de base de datos - SQLite"""
+# PASO #1 CONECTAR LA BASE DE DATOS
+# PASO #2 CREAR EL CURSOR
+# PASO #3 CREAR LAS TABLAS
+# PASO #4 INSERTAR DATOS
+# PASO #5 GUARDAR CAMBIOS (COMMIT)
+# PASO #6 CONSULTAR DATOS
+# PASO #7 CERRAR CONEXION
+
 import sqlite3
 import os
-from datetime import date
 
 
 class DatabaseManager:
-    """Gestiona la conexión y operaciones con SQLite"""
+    """Gestiona la conexion y operaciones con SQLite"""
 
-    def __init__(self, db_path: str = "db/biblioteca.db"):
-        os.makedirs(os.path.dirname(db_path), exist_ok=True)
+    def __init__(self, db_path="db/biblioteca.db"):
         self.__db_path = db_path
         self.__conn = None
 
-    def connect(self):
-        """Paso 1: Conectar a la base de datos"""
-        self.__conn = sqlite3.connect(self.__db_path)
-        self.__conn.execute("PRAGMA foreign_keys = ON")
-        return self.__conn
+        # Crea la carpeta db/ si no existe
+        carpeta = os.path.dirname(db_path)
+        if carpeta and not os.path.exists(carpeta):
+            os.makedirs(carpeta)
 
+    # PASO #1 CONECTAR LA BASE DE DATOS
+    def connect(self):
+        """Establece la conexion al archivo .db"""
+        self.__conn = sqlite3.connect(self.__db_path)
+        # Activa las claves foraneas
+        self.__conn.execute("PRAGMA foreign_keys = ON")
+
+    # PASO #7 CERRAR CONEXION
     def disconnect(self):
-        """Cierra la conexión"""
+        """Cierra la conexion a la base de datos"""
         if self.__conn:
             self.__conn.close()
 
-    @property
-    def connection(self):
+    def get_connection(self):
         return self.__conn
 
-    @property
-    def cursor(self):
+    def get_cursor(self):
         return self.__conn.cursor()
 
+    # PASO #3 CREAR LAS TABLAS
     def create_tables(self):
-        """Crea las tablas de la base de datos"""
-        cursor = self.cursor
+        """Crea las tablas de la base de datos (minimo 2 relacionadas)"""
+        cursor = self.get_cursor()
 
-        # Tabla: socios
+        # Tabla 1: socios (estudiantes y docentes)
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS socios (
+            CREATE TABLE IF NOT EXISTS socios(
                 cedula TEXT PRIMARY KEY,
                 nombre TEXT NOT NULL,
                 apellido TEXT NOT NULL,
@@ -48,9 +59,9 @@ class DatabaseManager:
             )
         """)
 
-        # Tabla: libros (relacionada con prestamos)
+        # Tabla 2: libros (catalogo)
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS libros (
+            CREATE TABLE IF NOT EXISTS libros(
                 isbn TEXT PRIMARY KEY,
                 titulo TEXT NOT NULL,
                 autor TEXT NOT NULL,
@@ -61,30 +72,31 @@ class DatabaseManager:
             )
         """)
 
-        # Tabla: prestamos (relaciona socios y libros)
+        # Tabla 3: prestamos (relaciona socios y libros - clave foranea)
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS prestamos (
+            CREATE TABLE IF NOT EXISTS prestamos(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 cedula_socio TEXT NOT NULL,
                 isbn_libro TEXT NOT NULL,
                 fecha_prestamo TEXT NOT NULL,
                 fecha_devolucion TEXT,
-                FOREIGN KEY (cedula_socio) REFERENCES socios(cedula),
-                FOREIGN KEY (isbn_libro) REFERENCES libros(isbn)
+                FOREIGN KEY(cedula_socio) REFERENCES socios(cedula),
+                FOREIGN KEY(isbn_libro) REFERENCES libros(isbn)
             )
         """)
 
-        # Tabla: reservas
+        # Tabla 4: reservas (cola de espera)
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS reservas (
+            CREATE TABLE IF NOT EXISTS reservas(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 cedula_socio TEXT NOT NULL,
                 isbn_libro TEXT NOT NULL,
                 fecha_reserva TEXT NOT NULL,
                 activa INTEGER DEFAULT 1,
-                FOREIGN KEY (cedula_socio) REFERENCES socios(cedula),
-                FOREIGN KEY (isbn_libro) REFERENCES libros(isbn)
+                FOREIGN KEY(cedula_socio) REFERENCES socios(cedula),
+                FOREIGN KEY(isbn_libro) REFERENCES libros(isbn)
             )
         """)
 
+        # PASO #5 GUARDAR CAMBIOS
         self.__conn.commit()

@@ -1,41 +1,39 @@
-"""Pila (Stack) - para deshacer operaciones LIFO"""
+# PILA (Stack) - Estructura LIFO (Last In, First Out)
+# El ultimo en entrar es el primero en salir
+# Sirve para deshacer operaciones (undo)
+# Investigacion: Cairo, O., & Guardati, S. (2006). Estructuras de datos (3a ed.). McGraw-Hill.
 
 
 class Stack:
-    """Pila LIFO usando lista enlazada internamente"""
+    """Pila LIFO: se usa para deshacer prestamos/devoluciones"""
 
     def __init__(self):
         from src.data_structures.linked_list import LinkedList
         self.__items = LinkedList()
 
+    # Apila al inicio
     def push(self, data):
-        """Apila un elemento al inicio"""
         self.__items.prepend(data)
 
+    # Desapila el ultimo ingresado
     def pop(self):
-        """Desapila y retorna el elemento superior"""
         if self.is_empty():
             return None
-        items = self.__items.to_list()
-        top = items[0]
-        self.__items.remove(top)
-        return top
+        ultimo = self.__items.to_list()[0]
+        self.__items.remove(ultimo)
+        return ultimo
 
+    # Muestra el tope sin desapilar
     def peek(self):
-        """Retorna el elemento superior sin desapilar"""
         if self.is_empty():
             return None
         return self.__items.to_list()[0]
 
-    def is_empty(self) -> bool:
+    def is_empty(self):
         return self.__items.is_empty()
 
-    @property
-    def size(self) -> int:
-        return self.__items.size
+    def get_tamano(self):
+        return len(self.__items)
 
-    def to_list(self) -> list:
+    def to_list(self):
         return self.__items.to_list()
-
-    def __len__(self) -> int:
-        return self.__items.size

@@ -5,8 +5,3 @@ from .estudiante import Estudiante
 from .libro import Libro
 from .prestamo import Prestamo
 from .reserva import Reserva
-
-__all__ = [
-    "Persona", "Socio", "Docente", "Estudiante",
-    "Libro", "Prestamo", "Reserva"
-]

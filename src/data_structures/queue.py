@@ -1,41 +1,38 @@
-"""Cola (Queue) - para gestionar reservas en orden de llegada FIFO"""
+# COLA (Queue) - Estructura FIFO (First In, First Out)
+# El primero en llegar es el primero en ser atendido
+# Investigacion: Cairo, O., & Guardati, S. (2006). Estructuras de datos (3a ed.). McGraw-Hill.
 
 
 class Queue:
-    """Cola FIFO usando lista enlazada internamente"""
+    """Cola FIFO: se usa para las reservas (orden de llegada)"""
 
     def __init__(self):
         from src.data_structures.linked_list import LinkedList
         self.__items = LinkedList()
 
+    # Agrega al final de la cola
     def enqueue(self, data):
-        """Agrega un elemento al final de la cola"""
         self.__items.append(data)
 
+    # Saca al primero de la cola
     def dequeue(self):
-        """Elimina y retorna el elemento del frente"""
         if self.is_empty():
             return None
-        items = self.__items.to_list()
-        first = items[0]
-        self.__items.remove(first)
-        return first
+        primero = self.__items.to_list()[0]
+        self.__items.remove(primero)
+        return primero
 
+    # Muestra al primero sin sacarlo
     def peek(self):
-        """Retorna el elemento del frente sin eliminarlo"""
         if self.is_empty():
             return None
         return self.__items.to_list()[0]
 
-    def is_empty(self) -> bool:
+    def is_empty(self):
         return self.__items.is_empty()
 
-    @property
-    def size(self) -> int:
-        return self.__items.size
+    def get_tamano(self):
+        return len(self.__items)
 
-    def to_list(self) -> list:
+    def to_list(self):
         return self.__items.to_list()
-
-    def __len__(self) -> int:
-        return self.__items.size

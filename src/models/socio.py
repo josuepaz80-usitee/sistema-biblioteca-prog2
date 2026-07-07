@@ -1,29 +1,27 @@
-"""Clase Socio - wrapper polimórfico"""
+# Clase para la declaracion de tipo de socio (polimorfismo)
 from src.models.persona import Persona
 from src.models.estudiante import Estudiante
 from src.models.docente import Docente
 
 
 class Socio:
-    """Wrapper que maneja Estudiante o Docente polimórficamente"""
+    """Wrapper que contiene una Persona (Estudiante o Docente)"""
 
-    def __init__(self, persona: Persona):
-        self.__persona = persona  # Composición con Persona
+    def __init__(self, persona):
+        self.__persona = persona
 
-    @property
-    def persona(self) -> Persona:
+    def get_persona(self):
         return self.__persona
 
-    @property
-    def cedula(self) -> str:
-        return self.__persona.cedula
+    def get_cedula(self):
+        return self.__persona.get_cedula()
 
-    @property
-    def nombre_completo(self) -> str:
-        return self.__persona.nombre_completo
+    def get_nombre_completo(self):
+        return self.__persona.get_nombre_completo()
 
-    def tipo_socio(self) -> str:
+    # Polimorfismo: llama al método según el tipo real de persona
+    def tipo_socio(self):
         return self.__persona.tipo_socio()
 
-    def __str__(self) -> str:
+    def __str__(self):
         return str(self.__persona)

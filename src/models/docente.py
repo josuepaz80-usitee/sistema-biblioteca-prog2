@@ -1,21 +1,22 @@
-"""Clase Docente - hereda de Persona"""
+# Hereda de Persona (herencia simple)
 from src.models.persona import Persona
 
 
 class Docente(Persona):
-    """Representa un docente universitario"""
+    """Subclase: Representa un docente universitario"""
 
-    def __init__(self, cedula: str, nombre: str, apellido: str,
-                 departamento: str, telefono: str = ""):
-        super().__init__(cedula, nombre, apellido, telefono)
+    def __init__(self, cedula, nombre, apellido, departamento, telefono=""):
+        Persona.__init__(self, cedula, nombre, apellido, telefono)
         self.__departamento = departamento
 
-    @property
-    def departamento(self) -> str:
+    # Getter
+    def get_departamento(self):
         return self.__departamento
 
-    def tipo_socio(self) -> str:
+    # Polimorfismo: implementación propia de tipo_socio()
+    def tipo_socio(self):
         return "Docente"
 
-    def __str__(self) -> str:
-        return f"{super().__str__()} | {self.tipo_socio()} - Depto. {self.__departamento}"
+    def __str__(self):
+        return (Persona.__str__(self) + " | " + self.tipo_socio()
+                + " - Depto. " + self.__departamento)

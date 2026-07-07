@@ -1,37 +1,40 @@
-"""Clase Reserva - representa una reserva en cola"""
+# Clase Reserva - reserva de un ejemplar no disponible
 from datetime import date
 from src.models.socio import Socio
 from src.models.libro import Libro
 
 
 class Reserva:
-    """Representa la reserva de un ejemplar no disponible"""
+    """Reserva de un libro cuando no hay ejemplares disponibles"""
 
-    def __init__(self, socio: Socio, libro: Libro, fecha: date = None):
+    def __init__(self, socio, libro, fecha=None):
         self.__socio = socio
         self.__libro = libro
-        self.__fecha = fecha or date.today()
+        if fecha is None:
+            self.__fecha = date.today()
+        else:
+            self.__fecha = fecha
         self.__activa = True
 
-    @property
-    def socio(self) -> Socio:
+    def get_socio(self):
         return self.__socio
 
-    @property
-    def libro(self) -> Libro:
+    def get_libro(self):
         return self.__libro
 
-    @property
-    def fecha(self) -> date:
+    def get_fecha(self):
         return self.__fecha
 
-    @property
-    def activa(self) -> bool:
+    def esta_activa(self):
         return self.__activa
 
     def cancelar(self):
         self.__activa = False
 
-    def __str__(self) -> str:
-        estado = "Activa" if self.__activa else "Cancelada"
-        return f"Reserva: {self.__libro.titulo} → {self.__socio.nombre_completo} [{estado}]"
+    def __str__(self):
+        if self.__activa:
+            estado = "Activa"
+        else:
+            estado = "Cancelada"
+        return ("Reserva: " + self.__libro.get_titulo() + " → "
+                + self.__socio.get_nombre_completo() + " [" + estado + "]")

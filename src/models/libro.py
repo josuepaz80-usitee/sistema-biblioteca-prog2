@@ -1,62 +1,56 @@
-"""Clase Libro - representa un ejemplar del catálogo"""
+# Clase Libro - representa un libro del catálogo
 class Libro:
-    """Representa un libro en el catálogo de la biblioteca"""
+    """Representa un libro en el catálogo"""
 
-    def __init__(self, isbn: str, titulo: str, autor: str,
-                 editorial: str, anio: int, ejemplares: int = 1):
+    def __init__(self, isbn, titulo, autor, editorial, anio, ejemplares=1):
         self.__isbn = isbn
         self.__titulo = titulo
         self.__autor = autor
         self.__editorial = editorial
         self.__anio = anio
         self.__ejemplares = ejemplares
-        self.__disponibles = ejemplares
+        self.__disponibles = ejemplares  # Inicialmente todos disponibles
 
     # Getters
-    @property
-    def isbn(self) -> str:
+    def get_isbn(self):
         return self.__isbn
 
-    @property
-    def titulo(self) -> str:
+    def get_titulo(self):
         return self.__titulo
 
-    @property
-    def autor(self) -> str:
+    def get_autor(self):
         return self.__autor
 
-    @property
-    def editorial(self) -> str:
+    def get_editorial(self):
         return self.__editorial
 
-    @property
-    def anio(self) -> int:
+    def get_anio(self):
         return self.__anio
 
-    @property
-    def ejemplares(self) -> int:
+    def get_ejemplares(self):
         return self.__ejemplares
 
-    @property
-    def disponibles(self) -> int:
+    def get_disponibles(self):
         return self.__disponibles
 
-    def prestar_ejemplar(self) -> bool:
-        """Presta un ejemplar si hay disponibles"""
+    # Métodos del dominio
+    def prestar_ejemplar(self):
+        """Reduce en 1 los disponibles si hay stock"""
         if self.__disponibles > 0:
             self.__disponibles -= 1
             return True
         return False
 
-    def devolver_ejemplar(self) -> bool:
-        """Devuelve un ejemplar"""
+    def devolver_ejemplar(self):
+        """Aumenta en 1 los disponibles"""
         if self.__disponibles < self.__ejemplares:
             self.__disponibles += 1
             return True
         return False
 
-    def esta_disponible(self) -> bool:
+    def esta_disponible(self):
         return self.__disponibles > 0
 
-    def __str__(self) -> str:
-        return f"{self.__titulo} - {self.__autor} ({self.__anio}) | Disp: {self.__disponibles}/{self.__ejemplares}"
+    def __str__(self):
+        return (self.__titulo + " - " + self.__autor + " (" + str(self.__anio)
+                + ") | Disp: " + str(self.__disponibles) + "/" + str(self.__ejemplares))

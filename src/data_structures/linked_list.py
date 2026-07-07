@@ -1,91 +1,95 @@
-"""Lista enlazada simple - para el catálogo dinámico de libros"""
+# PASO 1: CREAR LA LISTA ENLAZADA
+# Cada nodo tiene un dato y un puntero al siguiente nodo
+# Investigacion: Weiss, M. A. (2013). Estructuras de datos y algoritmos (4a ed.). Pearson.
 
 
-class Node:
+class Nodo:
     """Nodo de la lista enlazada"""
-
     def __init__(self, data):
         self.data = data
-        self.next = None
+        self.next = None  # Apunta al siguiente nodo (None si es el ultimo)
 
 
 class LinkedList:
     """Lista enlazada simple"""
 
     def __init__(self):
-        self.__head = None
-        self.__size = 0
+        self.__head = None  # Primer nodo de la lista
+        self.__tamano = 0
 
-    def is_empty(self) -> bool:
+    def is_empty(self):
         return self.__head is None
 
-    @property
-    def size(self) -> int:
-        return self.__size
+    def get_tamano(self):
+        return self.__tamano
 
     def append(self, data):
-        """Agrega un elemento al final"""
-        new_node = Node(data)
+        """Agrega un elemento al final de la lista"""
+        nuevo = Nodo(data)
         if self.is_empty():
-            self.__head = new_node
+            self.__head = nuevo
         else:
-            current = self.__head
-            while current.next:
-                current = current.next
-            current.next = new_node
-        self.__size += 1
+            actual = self.__head
+            while actual.next is not None:
+                actual = actual.next
+            actual.next = nuevo
+        self.__tamano += 1
 
     def prepend(self, data):
-        """Agrega un elemento al inicio"""
-        new_node = Node(data)
-        new_node.next = self.__head
-        self.__head = new_node
-        self.__size += 1
+        """Agrega un elemento al inicio de la lista"""
+        nuevo = Nodo(data)
+        nuevo.next = self.__head
+        self.__head = nuevo
+        self.__tamano += 1
 
-    def remove(self, data) -> bool:
-        """Elimina un elemento por su valor"""
+    def remove(self, data):
+        """Elimina un elemento de la lista"""
         if self.is_empty():
             return False
         if self.__head.data == data:
             self.__head = self.__head.next
-            self.__size -= 1
+            self.__tamano -= 1
             return True
-        current = self.__head
-        while current.next:
-            if current.next.data == data:
-                current.next = current.next.next
-                self.__size -= 1
+        actual = self.__head
+        while actual.next is not None:
+            if actual.next.data == data:
+                actual.next = actual.next.next
+                self.__tamano -= 1
                 return True
-            current = current.next
+            actual = actual.next
         return False
 
+    # Busqueda lineal: recorre nodo por nodo (O(n))
     def find(self, data):
-        """Busca un elemento por su valor (búsqueda lineal)"""
-        current = self.__head
-        while current:
-            if current.data == data:
-                return current.data
-            current = current.next
+        actual = self.__head
+        while actual is not None:
+            if actual.data == data:
+                return actual.data
+            actual = actual.next
         return None
 
-    def to_list(self) -> list:
-        """Convierte la lista enlazada a lista de Python"""
-        result = []
-        current = self.__head
-        while current:
-            result.append(current.data)
-            current = current.next
-        return result
+    def to_list(self):
+        """Convierte la lista enlazada a lista normal de Python"""
+        resultado = []
+        actual = self.__head
+        while actual is not None:
+            resultado.append(actual.data)
+            actual = actual.next
+        return resultado
 
     def __iter__(self):
-        current = self.__head
-        while current:
-            yield current.data
-            current = current.next
+        actual = self.__head
+        while actual is not None:
+            yield actual.data
+            actual = actual.next
 
-    def __len__(self) -> int:
-        return self.__size
+    def __len__(self):
+        return self.__tamano
 
-    def __str__(self) -> str:
-        values = [str(d) for d in self.to_list()]
-        return "[" + " → ".join(values) + "]"
+    def __str__(self):
+        valores = []
+        actual = self.__head
+        while actual is not None:
+            valores.append(str(actual.data))
+            actual = actual.next
+        return "[" + " → ".join(valores) + "]"

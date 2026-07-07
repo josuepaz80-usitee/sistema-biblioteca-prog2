@@ -1,58 +1,36 @@
-"""Clase abstracta Persona - base del sistema"""
-from abc import ABC, abstractmethod
+# Atributos privados y métodos getter/setter
+class Persona:
+    """Clase base Persona (abstracción)"""
 
-
-class Persona(ABC):
-    """Clase abstracta que representa a una persona"""
-
-    def __init__(self, cedula: str, nombre: str, apellido: str, telefono: str = ""):
-        # Atributos privados (encapsulamiento)
+    def __init__(self, cedula, nombre, apellido, telefono=""):
         self.__cedula = cedula
         self.__nombre = nombre
         self.__apellido = apellido
         self.__telefono = telefono
 
-    # Getters y Setters
-    @property
-    def cedula(self) -> str:
+    # Getters
+    def get_cedula(self):
         return self.__cedula
 
-    @cedula.setter
-    def cedula(self, valor: str):
-        self.__cedula = valor
-
-    @property
-    def nombre(self) -> str:
+    def get_nombre(self):
         return self.__nombre
 
-    @nombre.setter
-    def nombre(self, valor: str):
-        self.__nombre = valor
-
-    @property
-    def apellido(self) -> str:
+    def get_apellido(self):
         return self.__apellido
 
-    @apellido.setter
-    def apellido(self, valor: str):
-        self.__apellido = valor
+    def get_nombre_completo(self):
+        return self.__nombre + " " + self.__apellido
 
-    @property
-    def nombre_completo(self) -> str:
-        return f"{self.__nombre} {self.__apellido}"
-
-    @property
-    def telefono(self) -> str:
+    def get_telefono(self):
         return self.__telefono
 
-    @telefono.setter
-    def telefono(self, valor: str):
-        self.__telefono = valor
+    # Setters
+    def set_telefono(self, telefono):
+        self.__telefono = telefono
 
-    @abstractmethod
-    def tipo_socio(self) -> str:
-        """Retorna el tipo de socio"""
-        pass
+    # Método que las subclases deben implementar (abstracción)
+    def tipo_socio(self):
+        raise NotImplementedError("Las subclases deben implementar tipo_socio()")
 
-    def __str__(self) -> str:
-        return f"{self.nombre_completo} - Cédula: {self.__cedula}"
+    def __str__(self):
+        return self.get_nombre_completo() + " - Cédula: " + self.__cedula
