@@ -351,9 +351,11 @@ El proyecto se aloja en GitHub bajo el control de versiones Git.
 | 3 | 8 jul | `eaf6cae` | `refactor: estilo nivel 3er semestre segun lo ensenado por Ing. Bryan Velez + DECLARATORIA` |
 | 4 | 9 jul | `7f9e535` | `fix: DECLARATORIA actualizada tras revision completa del material del semestre` |
 | 5 | 9 jul | `d388507` | `fix: referencias genericas sin nombres individuales en DECLARATORIA` |
-|| 6 | 11 jul | `ac193dd` | `docs: agregar documentacion del proyecto (especificacion, manual usuario, Gantt, README con roles)` |
+|| 6 | 11 jul | `ac193dd` | `docs: agregar documentacion del proyecto (especificacion, manual, Gantt, README con roles)` |
 || 7 | 11 jul | `6cf6167` | `docs: especificacion visible en markdown + creditos de autoría por integrante en cada archivo` |
 || 8 | 11 jul | `2d1e028` | `fix: formato limpio del credito de Mayra en manual-usuario.md` |
+|| 9 | 11 jul | `e8ce1b1` | `fix: actualizar historial de commits y DECLARATORIA (Tkinter + incremental)` |
+|| 10 | 11 jul | `165d556` | `docs: restaurar formato original con logo UAE + commits hasta #10` |
 
 ### 9.3 Stack Tecnológico del Desarrollo
 
