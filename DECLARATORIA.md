@@ -66,7 +66,8 @@ Los siguientes temas fueron enseñados por el Ing. Bryan Vélez durante las clas
 | Commit y cierre de conexión (`commit()`, `close()`) | ✅ Demostración en vivo | Clase 6-jul — video Semana 12 |
 | SELECT y fetchall (`cursor.fetchall()`) | ✅ Demostración en vivo | Clase 6-jul — video Semana 12 |
 | Uso de DB Browser for SQLite | ✅ Demostración en vivo | Clase 6-jul — video Semana 12 |
-| Concepto de Tkinter para GUI | ✅ Mencionado (no demostrado) | Clase 6-jul — video Semana 12 |
+|| Concepto de Tkinter para GUI e importación (`import tkinter as tk`) | ✅ Demostración en vivo | Clase 10-jul — video Semana 12 (timestamp 54:30) |
+|| Modelo de desarrollo incremental (3 incrementos) | ✅ Enseñado | Clase 10-jul — video Semana 12 |
 
 ---
 
