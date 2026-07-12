@@ -18,22 +18,41 @@ Sistema para automatizar el control de una biblioteca física universitaria. Ges
 - Estructuras de datos: lista enlazada, cola, pila
 - Algoritmos de ordenamiento (burbuja/inserción + merge/quick sort)
 - Búsqueda lineal y binaria
-- Base de datos SQLite con DB Browser (mínimo 2 tablas relacionadas, CRUD completo)
+- Base de datos SQLite con operaciones CRUD
 - Interfaz gráfica con Tkinter
+
+## Documentación
+
+| Documento | Enlace |
+|-----------|--------|
+| Especificación del Proyecto (50%) | [`docs/especificacion-proyecto.docx`](docs/especificacion-proyecto.docx) |
+| Manual de Usuario (borrador) | [`docs/manual-usuario.md`](docs/manual-usuario.md) |
+| Diagrama de Gantt | [`docs/gantt.png`](docs/gantt.png) |
+| Declaratoria de uso de IA | [`DECLARATORIA.md`](DECLARATORIA.md) |
+
+## Miembros del Grupo #1 — Roles
+
+| Integrante | Rol |
+|------------|-----|
+| Henry Pazmiño | Líder / Integrador |
+| Jodie Parrales | Desarrolladora GUI (Tkinter) |
+| Cindy Ayoví | Desarrolladora BD (SQLite) |
+| Cesar Gonzales | Desarrollador Lógica/Negocio |
+| Mayra Vera | Documentación y Pruebas |
 
 ## Estructura del Proyecto
 
 ```
 sistema-biblioteca-prog2/
 ├── src/                    # Código fuente
-│   ├── models/            # Clases del dominio
+│   ├── models/            # Clases del dominio (POO)
 │   ├── data_structures/   # Lista, cola, pila
 │   ├── algorithms/        # Ordenamiento y búsqueda
 │   ├── database/          # Conexión y operaciones BD
 │   └── gui/               # Interfaz gráfica Tkinter
-├── docs/                  # Documentación
+├── docs/                  # Documentación del proyecto
 ├── db/                    # Base de datos SQLite
-├── tests/                 # Pruebas
+├── tests/                 # Pruebas unitarias
 └── main.py                # Punto de entrada
 ```
 
@@ -41,15 +60,7 @@ sistema-biblioteca-prog2/
 
 📄 **`DECLARATORIA.md`** — Documento obligatorio que declara:
 - Uso de IA como herramienta de apoyo
-- Contenido enseñado en clase (Semana 12) vs. contenido investigado
-- **Referencias APA 7ª edición** para cada tema investigado (POO, estructuras, algoritmos, BD, GUI)
-- Justificación académica de cada concepto aplicado
+- Contenido enseñado en clase vs. contenido investigado
+- Referencias APA 7ª edición para cada tema investigado
 
-> ⚠️ **Nota académica:** Todo el código sigue el estilo de programación enseñado por el Ing. Bryan Vélez en clase: comentarios `# PASO #N`, encapsulamiento con getters/setters, herencia simple, polimorfismo, y estructura paso a paso. Los temas no cubiertos en clase están señalados en la DECLARATORIA con sus referencias APA.
-
-## Miembros del Grupo
-- Henry Pazmiño (Líder)
-- Jodie Parrales
-- Cindy Ayoví
-- Cesar Gonzales
-- Mayra Alejandra Vera Yagual
+> ⚠️ **Nota:** Todo el código sigue el estilo enseñado por el Ing. Bryan Vélez: comentarios `# PASO #N`, encapsulamiento con getters/setters, herencia simple, polimorfismo, y estructura paso a paso. Los temas no cubiertos en clase están señalados en la DECLARATORIA con sus referencias APA.
