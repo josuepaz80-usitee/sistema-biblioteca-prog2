@@ -25,7 +25,8 @@ Sistema para automatizar el control de una biblioteca física universitaria. Ges
 
 | Documento | Enlace |
 |-----------|--------|
-| Especificación del Proyecto (50%) | [`docs/especificacion-proyecto.docx`](docs/especificacion-proyecto.docx) |
+| Especificación del Proyecto (visible en GitHub) | [`docs/especificacion-proyecto.md`](docs/especificacion-proyecto.md) |
+| Especificación del Proyecto (DOCX para entrega) | [`docs/especificacion-proyecto.docx`](docs/especificacion-proyecto.docx) |
 | Manual de Usuario (borrador) | [`docs/manual-usuario.md`](docs/manual-usuario.md) |
 | Diagrama de Gantt | [`docs/gantt.png`](docs/gantt.png) |
 | Declaratoria de uso de IA | [`DECLARATORIA.md`](DECLARATORIA.md) |

@@ -1,3 +1,11 @@
+# ============================================================
+# Cindy Ayoví — Repositorio de Libros (CRUD completo)
+# CREATE: insertar nuevo libro
+# READ: buscar por ISBN, título, listar todos
+# UPDATE: actualizar disponibles
+# DELETE: eliminar libro
+# ============================================================
+
 # CRUD para la tabla libros (CREATE, READ, UPDATE, DELETE)
 from src.database.db_manager import DatabaseManager
 

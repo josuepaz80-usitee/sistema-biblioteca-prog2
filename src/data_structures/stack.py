@@ -1,3 +1,10 @@
+# ============================================================
+# Cesar Gonzales — Pila LIFO (Stack)
+# Last In, First Out — para deshacer operaciones (undo)
+# Implementada sobre LinkedList
+# Referencia: Cairo & Guardati (2006). Estructuras de datos.
+# ============================================================
+
 # PILA (Stack) - Estructura LIFO (Last In, First Out)
 # El ultimo en entrar es el primero en salir
 # Sirve para deshacer operaciones (undo)

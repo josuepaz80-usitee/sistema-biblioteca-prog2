@@ -1,3 +1,9 @@
+# ============================================================
+# Cesar Gonzales — Algoritmos de Búsqueda
+# Búsqueda Lineal (O(n)): recorre elemento por elemento
+# Búsqueda Binaria (O(log n)): divide y vencerás (requiere orden)
+# ============================================================
+
 # ALGORITMOS DE BUSQUEDA
 # Investigacion: Joyanes Aguilar, L. (2020). Programacion orientada a objetos
 # con Python. McGraw-Hill Interamericana.

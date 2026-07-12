@@ -1,3 +1,9 @@
+# ============================================================
+# Henry Pazmiño — Wrapper polimórfico Socio
+# Contiene una Persona (Estudiante o Docente) y delega tipo_socio()
+# Demuestra polimorfismo: mismo método, distinto resultado
+# ============================================================
+
 # Clase para la declaracion de tipo de socio (polimorfismo)
 from src.models.persona import Persona
 from src.models.estudiante import Estudiante

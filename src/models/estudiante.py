@@ -1,3 +1,8 @@
+# ============================================================
+# Henry Pazmiño — Subclase Estudiante (Herencia + Polimorfismo)
+# Demuestra herencia simple y polimorfismo con tipo_socio()
+# ============================================================
+
 # Hereda de Persona (herencia simple)
 from src.models.persona import Persona
 

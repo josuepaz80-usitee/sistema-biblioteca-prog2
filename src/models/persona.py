@@ -1,3 +1,9 @@
+# ============================================================
+# Henry Pazmiño — Clase base abstracta Persona
+# Abstracción: tipo_socio() como contrato para subclases
+# Encapsulamiento: atributos privados (self.__) con getters/setters
+# ============================================================
+
 # Atributos privados y métodos getter/setter
 class Persona:
     """Clase base Persona (abstracción)"""

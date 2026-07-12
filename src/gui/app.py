@@ -1,3 +1,10 @@
+# ============================================================
+# Jodie Parrales — Interfaz gráfica con Tkinter
+# Ventana principal, menús desplegables, formularios CRUD
+# Tkinter viene por defecto en Python (no requiere instalacion)
+# Referencia: Grayson, J. E. (2000). Python and Tkinter programming.
+# ============================================================
+
 # INTERFAZ GRAFICA CON TKINTER
 # Tkinter viene por defecto en Python (no requiere instalacion)
 # Investigacion: Grayson, J. E. (2000). Python and Tkinter programming. Manning.

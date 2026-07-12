@@ -1,3 +1,9 @@
+# ============================================================
+# Cindy Ayoví — Gestión de base de datos SQLite
+# Conexión, creación de tablas (4 tablas relacionadas con FK)
+# Sigue los pasos enseñados en clase por Ing. Bryan Vélez
+# ============================================================
+
 # PASO #1 CONECTAR LA BASE DE DATOS
 # PASO #2 CREAR EL CURSOR
 # PASO #3 CREAR LAS TABLAS

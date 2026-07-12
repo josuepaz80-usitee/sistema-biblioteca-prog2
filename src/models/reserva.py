@@ -1,3 +1,9 @@
+# ============================================================
+# Henry Pazmiño — Clase Reserva
+# Cola de espera para libros sin ejemplares disponibles
+# Se integra con Queue (FIFO) para orden de llegada
+# ============================================================
+
 # Clase Reserva - reserva de un ejemplar no disponible
 from datetime import date
 from src.models.socio import Socio

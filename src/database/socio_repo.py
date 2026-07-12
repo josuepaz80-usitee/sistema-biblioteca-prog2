@@ -1,3 +1,11 @@
+# ============================================================
+# Cindy Ayoví — Repositorio de Socios (CRUD completo)
+# CREATE: insertar nuevo socio (estudiante o docente)
+# READ: buscar por cédula, listar todos ordenados
+# UPDATE: actualizar teléfono
+# DELETE: eliminar socio
+# ============================================================
+
 # CRUD para la tabla socios (CREATE, READ, UPDATE, DELETE)
 from src.database.db_manager import DatabaseManager
 

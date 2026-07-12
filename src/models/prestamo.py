@@ -1,3 +1,9 @@
+# ============================================================
+# Henry Pazmiño — Clase Préstamo
+# Relaciona un Socio con un Libro en una fecha determinada
+# Control de estado: pendiente vs devuelto
+# ============================================================
+
 # Clase Prestamo - representa el prestamo de un libro
 from datetime import date
 from src.models.socio import Socio

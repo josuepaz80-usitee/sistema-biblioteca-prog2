@@ -1,3 +1,10 @@
+# ============================================================
+# Cesar Gonzales — Lista Enlazada Simple
+# Cada nodo: dato + puntero al siguiente nodo
+# Operaciones: append, prepend, remove, find
+# Referencia: Weiss, M. A. (2013). Estructuras de datos y algoritmos.
+# ============================================================
+
 # PASO 1: CREAR LA LISTA ENLAZADA
 # Cada nodo tiene un dato y un puntero al siguiente nodo
 # Investigacion: Weiss, M. A. (2013). Estructuras de datos y algoritmos (4a ed.). Pearson.

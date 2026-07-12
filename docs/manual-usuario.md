@@ -1,3 +1,8 @@
+# ============================================================
+# Mayra Vera — Manual de Usuario
+# Documentación para el usuario final del sistema
+# ============================================================
+
 # Manual de Usuario — Sistema de Gestión de Biblioteca Universitaria
 
 **Grupo #1 — Lenguaje de Programación 2**

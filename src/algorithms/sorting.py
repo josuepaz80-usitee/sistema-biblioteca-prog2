@@ -1,3 +1,10 @@
+# ============================================================
+# Cesar Gonzales — Algoritmos de Ordenamiento
+# Básicos: Bubble Sort O(n²), Insertion Sort O(n²)
+# Avanzados: Merge Sort O(n log n), Quick Sort O(n log n)
+# Referencia: Cormen, T. H. et al. (2009). Introduction to algorithms.
+# ============================================================
+
 # ALGORITMOS DE ORDENAMIENTO
 # Investigacion: Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009).
 # Introduction to algorithms (3rd ed.). MIT Press.

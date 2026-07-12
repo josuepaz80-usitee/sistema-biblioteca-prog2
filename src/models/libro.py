@@ -1,3 +1,8 @@
+# ============================================================
+# Henry Pazmiño — Clase Libro con lógica de préstamo/devolución
+# Control de stock: ejemplares totales vs disponibles
+# ============================================================
+
 # Clase Libro - representa un libro del catálogo
 class Libro:
     """Representa un libro en el catálogo"""

@@ -1,3 +1,10 @@
+# ============================================================
+# Cesar Gonzales — Cola FIFO (Queue)
+# First In, First Out — para reservas por orden de llegada
+# Implementada sobre LinkedList
+# Referencia: Cairo & Guardati (2006). Estructuras de datos.
+# ============================================================
+
 # COLA (Queue) - Estructura FIFO (First In, First Out)
 # El primero en llegar es el primero en ser atendido
 # Investigacion: Cairo, O., & Guardati, S. (2006). Estructuras de datos (3a ed.). McGraw-Hill.

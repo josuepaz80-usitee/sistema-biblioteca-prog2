@@ -1,3 +1,9 @@
+# ============================================================
+# Mayra Vera — Pruebas unitarias del sistema
+# Verifica modelos POO, estructuras de datos, algoritmos
+# y base de datos funcionan correctamente
+# ============================================================
+
 # Pruebas unitarias del sistema
 # Verifica que los modelos, estructuras y algoritmos funcionan correctamente
 import sys

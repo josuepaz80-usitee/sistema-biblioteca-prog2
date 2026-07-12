@@ -9,7 +9,8 @@
 
 | Documento | Estado | Formato | Semana |
 |-----------|--------|---------|--------|
-| [Especificación del Proyecto](./especificacion-proyecto.docx) | ✅ 50% (avance) | DOCX | 12 |
+|| [Especificación del Proyecto (Markdown)](./especificacion-proyecto.md) | ✅ Completo (visible en GitHub) | MD | 12 |
+|| [Especificación del Proyecto (DOCX)](./especificacion-proyecto.docx) | ✅ 50% (avance) | DOCX | 12 |
 | [Manual de Usuario](./manual-usuario.md) | 📝 Borrador inicial | MD | 14 |
 | [Declaratoria de uso de IA](../DECLARATORIA.md) | ✅ Completo | MD | 12 |
 | [Diagrama de Gantt](./gantt.png) | ✅ Completo | PNG | 12 |
