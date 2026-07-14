@@ -326,7 +326,7 @@ Algoritmos:
 |--------|---------------|-------------------|
 | Modelos POO | Henry Pazmiño | Clases Persona, Estudiante, Docente, Libro, Socio, Prestamo, Reserva. Encapsulamiento, herencia, polimorfismo, abstracción |
 | GUI Tkinter | Jodie Parrales | Ventana principal, menús, formularios, tablas, cuadros de diálogo. Integración con los repositorios de datos |
-| Base de Datos | Cindy Ayoví | Conexión SQLite, creación de tablas, CRUD completo para socios y libros, consultas con joins |
+| Base de Datos | Cindy Ayoví | Conexión SQLite, creación de tablas, CRUD completo para socios y libros, consultas con joins, **seed.py con datos de prueba (7 socios + 8 libros)** |
 | Algoritmos y Estructuras | Cesar Gonzales | Merge Sort, Quick Sort, Bubble Sort, Insertion Sort, búsqueda lineal y binaria, lista enlazada, cola FIFO, pila LIFO |
 | Pruebas y Documentación | Mayra Vera | Pruebas unitarias, manual de usuario, validación de funcionalidades, casos de prueba |
 
@@ -356,6 +356,8 @@ El proyecto se aloja en GitHub bajo el control de versiones Git.
 || 8 | 11 jul | `2d1e028` | `fix: formato limpio del credito de Mayra en manual-usuario.md` |
 || 9 | 11 jul | `e8ce1b1` | `fix: actualizar historial de commits y DECLARATORIA (Tkinter + incremental)` |
 || 10 | 11 jul | `165d556` | `docs: restaurar formato original con logo UAE + commits hasta #10` |
+|| 11 | 11 jul | `8b01d20` | `docs: sincronizar historial de commits en markdown hasta #10` |
+|| 12 | 11 jul | `ee37e02` | `feat: seed de base de datos con datos de prueba (Cindy Ayoví - BD)` |
 
 ### 9.3 Stack Tecnológico del Desarrollo
 
@@ -426,7 +428,7 @@ Defensa oral           |       |        |        |   ●
 | Prioridad | Tarea | Responsable |
 |:---------:|-------|-------------|
 | 🔴 Alta | Implementar formularios CRUD en GUI (Registrar Socio, Agregar Libro) | Jodie Parrales |
-| 🔴 Alta | Poblar la base de datos con datos de prueba | Cindy Ayoví |
+| ✅ Completado | Poblar la base de datos con datos de prueba (seed.py — 7 socios + 8 libros) | Cindy Ayoví |
 | 🟡 Media | Completar lógica de préstamos y devoluciones en GUI | Jodie + Cesar |
 | 🟡 Media | Pruebas de integración módulo BD + GUI | Mayra Vera |
 | 🟢 Baja | Manual de usuario con capturas de pantalla | Mayra Vera |

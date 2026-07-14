@@ -33,11 +33,15 @@ El Sistema de Gestión de Biblioteca Universitaria es una aplicación de escrito
 
 Pasos generales:
 1. Clonar el repositorio o descargar los archivos del proyecto
-2. Ejecutar `main.py` desde la terminal:
+2. Ejecutar `seed.py` para crear y poblar la base de datos:
+   ```
+   python seed.py
+   ```
+   Esto crea `db/biblioteca.db` con 7 socios y 8 libros.
+3. Ejecutar `main.py` para iniciar el sistema:
    ```
    python main.py
    ```
-3. El sistema creará automáticamente la base de datos en `db/biblioteca.db`
 
 ## 4. Guía de Uso
 

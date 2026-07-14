@@ -37,7 +37,7 @@ Sistema para automatizar el control de una biblioteca física universitaria. Ges
 |------------|-----|
 | Henry Pazmiño | Líder / Integrador |
 | Jodie Parrales | Desarrolladora GUI (Tkinter) |
-| Cindy Ayoví | Desarrolladora BD (SQLite) |
+| Cindy Ayoví | Desarrolladora BD (SQLite) — seed.py, CRUD socios/libros |
 | Cesar Gonzales | Desarrollador Lógica/Negocio |
 | Mayra Vera | Documentación y Pruebas |
 
