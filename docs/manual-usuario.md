@@ -73,10 +73,10 @@ Al iniciar el sistema, se muestra la ventana principal con un menú superior que
 
 El sistema utiliza SQLite con las siguientes tablas:
 
-- **socios**: id, cedula, nombre, apellido, tipo, carrera_departamento, semestre, telefono
-- **libros**: id, titulo, autor, isbn, anio, categoria, ejemplares, disponibles
-- **prestamos**: id, socio_id (FK), libro_id (FK), fecha_prestamo, fecha_devolucion, estado
-- **reservas**: id, socio_id (FK), libro_id (FK), fecha_reserva, posicion
+- **socios** (cedula PK): cedula, nombre, apellido, tipo (Estudiante/Docente), carrera_departamento, semestre, telefono
+- **libros** (isbn PK): isbn, titulo, autor, editorial, anio, ejemplares, disponibles
+- **prestamos**: id, cedula_socio (FK), isbn_libro (FK), fecha_prestamo, fecha_devolucion
+- **reservas**: id, cedula_socio (FK), isbn_libro (FK), fecha_reserva, activa
 
 ## 6. Solución de Problemas
 
