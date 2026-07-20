@@ -190,8 +190,8 @@ def probar_database():
     prestamo_repo.insertar("1234567890", "978-3-16-148410-0", "2026-07-20")
     prestamos = prestamo_repo.listar_todos()
     assert len(prestamos) == 1, f"Esperado 1 prestamo, obtenido {len(prestamos)}"
-    print(f"  Prestamo creado: ID={prestamos[0][0]}, Pendiente={prestamos[0][3] is None}")
-    assert prestamos[0][3] is None  # fecha_devolucion debe ser NULL
+    print(f"  Prestamo creado: ID={prestamos[0][0]}, Fecha={prestamos[0][3]}, Devuelto={prestamos[0][4] is None}")
+    assert prestamos[0][4] is None  # fecha_devolucion debe ser NULL (columna 4)
 
     # Probar listar pendientes
     pendientes = prestamo_repo.listar_pendientes()
@@ -201,8 +201,8 @@ def probar_database():
     # Probar registrar devolucion
     prestamo_repo.registrar_devolucion(1, "2026-07-22")
     prestamo = prestamo_repo.obtener_por_id(1)
-    assert prestamo[3] == "2026-07-22"
-    print(f"  Devolucion registrada: fecha={prestamo[3]}")
+    assert prestamo[4] == "2026-07-22"  # columna 4 = fecha_devolucion
+    print(f"  Devolucion registrada: fecha={prestamo[4]}")
 
     # Pendientes debe estar vacio ahora
     pendientes = prestamo_repo.listar_pendientes()
@@ -221,7 +221,7 @@ def probar_database():
     activas = reserva_repo.listar_activas()
     assert len(activas) == 1
     print(f"  Reserva creada: ID={activas[0][0]}, Activa={activas[0][4]}")
-    assert activas[0][4] == 1  # activa = True
+    assert activas[0][4] == 1  # columna 4 = activa (INTEGER)
 
     # Probar cancelar reserva
     reserva_repo.cancelar(1)
