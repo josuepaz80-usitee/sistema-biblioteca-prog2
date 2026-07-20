@@ -177,109 +177,27 @@ Se utiliza el **Modelo Incremental**, que consiste en desarrollar el sistema por
 
 ### 7.1 Diagrama de Clases (UML)
 
-```
-+----------------------------------------+
-|              Persona                    | ◄-- Abstracción
-|  - __cedula: str                       |     (raise NotImplementedError)
-|  - __nombre: str                       |
-|  - __apellido: str                     |
-|  - __telefono: str                     |
-+----------------------------------------+
-|  + get_cedula(): str                   |
-|  + get_nombre_completo(): str          |
-|  + tipo_socio(): str                   | ◄-- Polimorfismo
-+------------+---------------------------+
-             |  Herencia
-    +--------+--------+
-    V                 V
-+-------------+ +-------------+
-|  Estudiante | |   Docente   |
-+-------------+ +-------------+
-| - __carrera | | - __depto   |
-| - __semestre| |             |
-+-------------+ +-------------+
-| + tipo_socio| | + tipo_socio|
-| = Estudiante| | = Docente   |
-+-------------+ +-------------+
-        |                |
-        +-------+--------+
-                V
-        +--------------+
-        |    Socio     | ◄-- Wrapper polimórfico
-        | - __persona  |      contiene Estudiante o Docente
-        +--------------+
+![Diagrama de Clases UML](diagramas/diagrama-clases-uml.png)
 
-+------------------+      +------------------+
-|      Libro       |      |    Prestamo      |
-+------------------+      +------------------+
-| - __isbn         |      | - __socio        |---> Socio
-| - __titulo       |      | - __libro        |---> Libro
-| - __autor        |      | - __fecha_prest  |
-| - __ejemplares   |      | - __fecha_dev    |
-| - __disponibles  |      +------------------+
-+------------------+
-| + prestar()      |      +------------------+
-| + devolver()     |      |    Reserva       |
-| + esta_disp()    |      +------------------+
-+------------------+      | - __socio        |---> Socio
-                          | - __libro        |---> Libro
-                          | - __fecha        |
-                          | - __activa       |
-                          +------------------+
+*Diagrama 1: Diagrama de clases del sistema mostrando jerarquia de herencia (Persona → Estudiante/Docente), wrapper polimórfico (Socio), modelos de dominio (Libro, Prestamo, Reserva), estructuras de datos (LinkedList, Queue, Stack) y algoritmos de búsqueda y ordenamiento.*
 
-Estructuras de Datos:
-+--------------+  +--------------+  +--------------+
-| LinkedList   |  |    Queue     |  |    Stack     |
-| (Nodo → Nodo)|  |  (FIFO)     |  |  (LIFO)      |
-| append()     |  | enqueue()   |  | push()       |
-| prepend()    |  | dequeue()   |  | pop()        |
-| remove()     |  | peek()      |  | peek()       |
-| find()       |  |             |  |              |
-+--------------+  +--------------+  +--------------+
 
-Algoritmos:
-+------------------+  +----------------------+
-|    Búsqueda      |  |   Ordenamiento       |
-| Lineal (O(n))    |  | Bubble (O(n²))       |
-| Binaria (O(log n))|  | Insertion (O(n²))   |
-+------------------+  | Merge (O(n log n))   |
-                      | Quick (O(n log n))   |
-                      +----------------------+
-```
+
 
 ### 7.2 Modelo Entidad-Relación (Base de Datos)
 
-```
-+-----------------------+         +---------------------------+
-|       socios          |         |         libros             |
-+-----------------------+         +---------------------------+
-| PK cedula: TEXT       |         | PK isbn: TEXT              |
-|     nombre: TEXT      |         |     titulo: TEXT           |
-|     apellido: TEXT    |         |     autor: TEXT            |
-|     tipo: TEXT        |         |     editorial: TEXT        |
-|     carrera: TEXT     |         |     anio: INTEGER          |
-|     semestre: INT     |         |     ejemplares: INT        |
-|     telefono: TEXT    |         |     disponibles: INT       |
-+-----------+-----------+         +-------------+-------------+
-            |                                   |
-            |                                   |
-            +----------+------------------------+
-                       |
-              +--------+--------+
-              |    prestamos    |        |      reservas      |
-              | PK id: INTEGER  |        | PK id: INTEGER     |
-              | FK cedula_socio |----    | FK cedula_socio    |---- socios
-              | FK isbn_libro   |----    | FK isbn_libro      |---- libros
-              | fecha_prestamo  |        | fecha_reserva      |
-              | fecha_devuelto  |        | activa: INTEGER    |
-              +-----------------+        +--------------------+
+![Diagrama Entidad-Relacion](diagramas/diagrama-er-bd.png)
 
-Relaciones:
-- socios (1) -> (N) prestamos   : Un socio puede tener 0 o muchos prestamos
-- socios (1) -> (N) reservas    : Un socio puede tener 0 o muchas reservas
-- libros (1) -> (N) prestamos   : Un libro puede estar en 0 o muchos prestamos
-- libros (1) -> (N) reservas    : Un libro puede tener 0 o muchas reservas
-```
+*Diagrama 2: Modelo entidad-relación de la base de datos mostrando las 4 tablas (socios, libros, prestamos, reservas), sus atributos, tipos de datos, claves primarias (PK) y foráneas (FK), y las relaciones 1:N entre ellas.*
+
+Las relaciones del modelo son:
+
+| Entidad A | Relación | Entidad B | Descripción |
+|:---------:|:--------:|:---------:|------------|
+| socios (1) | → (N) | prestamos | Un socio puede tener 0 o muchos préstamos |
+| socios (1) | → (N) | reservas | Un socio puede tener 0 o muchas reservas |
+| libros (1) | → (N) | prestamos | Un libro puede estar en 0 o muchos préstamos |
+| libros (1) | → (N) | reservas | Un libro puede tener 0 o muchas reservas |
 
 ---
 
