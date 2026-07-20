@@ -6,7 +6,6 @@ El presente proyecto tiene como objetivo desarrollar un **Sistema de Gestión de
 
 El sistema se desarrolla como proyecto final de la asignatura **Lenguaje de Programación 2**, aplicando los conceptos de Programación Orientada a Objetos, estructuras de datos, algoritmos de ordenamiento y búsqueda, bases de datos SQLite e interfaz gráfica con Tkinter, todos enseñados durante el semestre por el Ing. Bryan Vélez.
 
----
 
 ## 2. Justificación
 
@@ -21,7 +20,6 @@ La automatización de una biblioteca universitaria permite:
 
 Además, el proyecto permite aplicar conceptos fundamentales de la ingeniería de software como el modelo incremental, el control de versiones con Git/GitHub, y el uso de documentación técnica.
 
----
 
 ## 3. Objetivos
 
@@ -37,7 +35,6 @@ Desarrollar un sistema de escritorio para la gestión de una biblioteca universi
 4. Persistir los datos en una base de datos SQLite con operaciones CRUD completas y claves foráneas.
 5. Desarrollar una interfaz gráfica de usuario (GUI) utilizando Tkinter para la interacción con el sistema.
 
----
 
 ## 4. Alcance
 
@@ -61,7 +58,6 @@ Desarrollar un sistema de escritorio para la gestión de una biblioteca universi
 - **Bibliotecario**: usuario principal que opera el sistema para todas las funcionalidades
 - **Socio**: estudiante o docente cuyos datos son gestionados en el sistema
 
----
 
 ## 5. Marco Teórico
 
@@ -131,7 +127,6 @@ Tkinter es la biblioteca gráfica estándar de Python, incluida por defecto sin 
 
 **Referencia:** Grayson, J. E. (2000). *Python and Tkinter programming*. Manning Publications.
 
----
 
 ## 6. Metodología de Desarrollo
 
@@ -171,7 +166,6 @@ Se utiliza el **Modelo Incremental**, que consiste en desarrollar el sistema por
 | Git | 2.47+ | Control de versiones |
 | GitHub | — | Repositorio remoto |
 
----
 
 ## 7. Diseño Preliminar
 
@@ -199,7 +193,6 @@ Las relaciones del modelo son:
 | libros (1) | → (N) | prestamos | Un libro puede estar en 0 o muchos préstamos |
 | libros (1) | → (N) | reservas | Un libro puede tener 0 o muchas reservas |
 
----
 
 ## 8. Distribución del Trabajo
 
@@ -223,7 +216,6 @@ Las relaciones del modelo son:
 | Algoritmos y Estructuras | Cesar Gonzales | Merge Sort, Quick Sort, Bubble Sort, Insertion Sort, búsqueda lineal y binaria, lista enlazada, cola FIFO, pila LIFO |
 | Pruebas y Documentación | Mayra Vera | Pruebas unitarias, manual de usuario, validación de funcionalidades, casos de prueba |
 
----
 
 ## 9. Repositorio y Control de Versiones
 
@@ -269,7 +261,6 @@ El proyecto se aloja en GitHub bajo el control de versiones Git.
 - **BD:** SQLite3
 - **Documentación:** Markdown + DOCX + PDF
 
----
 
 ### 9.1 Plan de Trabajo y Cronograma
 
@@ -344,13 +335,11 @@ Defensa oral           |       |        |        |   →
 | Formato PDF académico | ✅ Completado | 20-jul | Portada, header/footer, tabla elegante |
 | **Defensa oral** | ⏳ **Pendiente** | **27-jul** | **Semana 15** |
 
----
 
 |> **Documento de Especificación — Avance 100% (Entrega Final)**
 > *Grupo #1 — Lenguaje de Programación 2 — UAE*
 > *Última actualización: 20 de julio de 2026*
 
----
 
 ## 10. Implementación
 
@@ -497,7 +486,6 @@ def realizar_prestamo(self):
         self.__libro_repo.actualizar_disponibles(isbn, libro[6] - 1)
 ```
 
----
 
 ## 11. Análisis de Complejidad (Big-O)
 
@@ -512,7 +500,6 @@ def realizar_prestamo(self):
 
 **Explicación:** Bubble Sort e Insertion Sort son O(n²) en el peor caso porque comparan cada elemento con todos los demás. Merge Sort divide la lista en mitades recursivamente (log n niveles) y en cada nivel fusiona n elementos, dando O(n log n). Quick Sort promedia O(n log n) pero puede degenerar a O(n²) si el pivote es mal elegido. Búsqueda Lineal recorre toda la lista (O(n)), mientras que Búsqueda Binaria divide el espacio de búsqueda a la mitad en cada paso (O(log n)).
 
----
 
 ## 12. Diseño de la Base de Datos
 
@@ -644,7 +631,6 @@ GROUP BY l.isbn
 ORDER BY reservas_activas DESC;
 ```
 
----
 
 ## 13. Pruebas Realizadas
 
@@ -664,7 +650,6 @@ Todas las pruebas se ejecutan con `python tests/test_models.py` y cubren:
 | PrestamoRepository | Insertar, listar, registrar devolución | ✅ Pasa |
 | ReservaRepository | Insertar, cancelar, listar por libro | ✅ Pasa |
 
----
 
 ## 14. Conclusiones y Recomendaciones
 
@@ -686,7 +671,6 @@ Todas las pruebas se ejecutan con `python tests/test_models.py` y cubren:
 - Generar reportes estadísticos (libros más prestados, multas, etc.).
 - Agregar una interfaz web para consultas desde dispositivos móviles.
 
----
 
 ## 15. Bibliografía (APA 7ª ed.)
 
@@ -700,7 +684,6 @@ Todas las pruebas se ejecutan con `python tests/test_models.py` y cubren:
 
 5. Sedgewick, R. y Wayne, K. (2011). *Algorithms* (4.ª ed.). Addison-Wesley. ISBN: 978-0321573513
 
----
 
 ## 16. Anexos
 
@@ -796,7 +779,6 @@ CREATE TABLE reservas(
 | Git | 2.47+ | Control de versiones |
 | GitHub | — | Repositorio remoto (colaboración grupal) |
 
----
 
 > *Documento de Especificación — Versión 1.0 (Entrega Final)*
 > *Grupo #1 — Lenguaje de Programación 2 — 3er Semestre — UAE*
