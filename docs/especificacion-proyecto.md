@@ -328,6 +328,14 @@ El proyecto se aloja en GitHub bajo el control de versiones Git.
 || 10 | 11 jul | `165d556` | `docs: restaurar formato original con logo UAE + commits hasta #10` |
 || 11 | 11 jul | `8b01d20` | `docs: sincronizar historial de commits en markdown hasta #10` |
 || 12 | 11 jul | `ee37e02` | `feat: seed de base de datos con datos de prueba (Cindy Ayoví - BD)` |
+|| 13 | 20 jul | `11cf096` | `docs: completar manual de usuario (instalacion, solucion problemas, FAQ)` |
+|| 14 | 20 jul | `f5ee021` | `docs: agregar capturas de pantalla (8) al manual` |
+|| 15 | 20 jul | `bdbca88` | `fix: corregir duplicados y numeracion en manual y especificacion` |
+|| 16 | 20 jul | `5b31576` | `docs: agregar ER diagrama, DDL SQL, consultas SQL, DB Browser guia, Anexos BD` |
+|| 17 | 20 jul | `cd3f461` | `docs: ajustar formato DOCX y PDF con estilos academicos (margenes, header, footer)` |
+|| 18 | 20 jul | `b9799eb` | `docs: portada con logo UAE, header/footer Grupo #1` |
+|| 19 | 20 jul | `782f1a5` | `docs: arreglar formato PDF - portada compacta, tabla elegante, sin duplicados` |
+|| 20 | 20 jul | `782f1a5` | `docs: actualizar Gantt + estado final del proyecto (entrega completa)` |
 
 ### 9.3 Stack Tecnológico del Desarrollo
 
@@ -346,62 +354,72 @@ El proyecto se aloja en GitHub bajo el control de versiones Git.
 
 ```
 Julio 2026
-───────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────
 Actividad              | Lun 7 | Sem 12 | Sem 13 | Sem 14
-                       | a jue 10| 10 jul| 13-17  | 20 jul
-───────────────────────────────────────────────────────
-Inicio del proyecto    | ████  |        |        |
+                       | a jue | 10 jul | 13-17  | 20 jul
+                       | 10    |        |        |
+────────────────────────────────────────────────────────────
+Inicio del proyecto    | █████ |  ████  |        |
 (planificación, repo)  |       |        |        |
                        |       |        |        |
-Modelos POO            |  ████ |        |        |
+Modelos POO            | █████ |  ████  |        |
 (clases, herencia,     |       |        |        |
 encapsulamiento)       |       |        |        |
                        |       |        |        |
-Estructuras de datos   |   ████|        |        |
+Estructuras de datos   | █████ |  ████  |        |
 (lista, cola, pila)    |       |        |        |
                        |       |        |        |
-Algoritmos             |    ███|        |        |
+Algoritmos             | █████ |  ████  |        |
 (búsqueda, ordenamiento)|       |       |        |
                        |       |        |        |
-Base de datos SQLite   |     ██|        |        |
+Base de datos SQLite   | █████ |  ████  |        |
 (tablas, CRUD)         |       |        |        |
                        |       |        |        |
-GUI Tkinter (stubs)    |      █|        |        |
+GUI Tkinter (stubs)    | █████ |  ████  |        |
                        |       |        |        |
-Documento Especificación|      █|   █    |        |
-(50%)                  |       |        |        |
+Documento Especificación| █████|  ████  | ██████ |
+(100%)                 |       |        |        |
                        |       |        |        |
 ─── ENTREGA TAREA 12 ──|       |   ●    |        |
                        |       | 11 jul |        |
                        |       |        |        |
-GUI funcional completa |       |        | ██████ |
+GUI funcional completa |       |        | ██████ | ███
 (formularios CRUD)     |       |        |        |
                        |       |        |        |
-BD poblada + reports   |       |        |  ████  |
+BD poblada + reports   |       |        | ██████ | ███
 (socios, libros)       |       |        |        |
                        |       |        |        |
-Pruebas unitarias      |       |        |   ███  |
+Pruebas unitarias      |       |        | ██████ | ███
+(11 tests)             |       |        |        |
                        |       |        |        |
-Manual de usuario      |       |        |    ██  |
-(capturas de pantalla) |       |        |        |
+Manual de usuario      |       |        | ██████ | ███
+(8 capturas pantalla)  |       |        |        |
+                       |       |        |        |
+Formato PDF académico  |       |        |        | ████
+(documento final)      |       |        |        |
                        |       |        |        |
 ─── ENTREGA FINAL ──── |       |        |        |   ●
                        |       |        |        | 20 jul
                        |       |        |        |
-Defensa oral           |       |        |        |   ●
+Defensa oral           |       |        |        |   →
 (Semana 15)            |       |        |        | 27 jul
-───────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────
 ```
 
-### 9.1.2 Prioridades para la Semana 13 (13-17 julio)
+### 9.1.2 Estado Final del Proyecto
 
-| Prioridad | Tarea | Responsable |
-|:---------:|-------|-------------|
-| 🔴 Alta | Implementar formularios CRUD en GUI (Registrar Socio, Agregar Libro) | Jodie Parrales |
-| ✅ Completado | Poblar la base de datos con datos de prueba (seed.py — 7 socios + 8 libros) | Cindy Ayoví |
-| 🟡 Media | Completar lógica de préstamos y devoluciones en GUI | Jodie + Cesar |
-| 🟡 Media | Pruebas de integración módulo BD + GUI | Mayra Vera |
-| 🟢 Baja | Manual de usuario con capturas de pantalla | Mayra Vera |
+| Módulo | Estado | Fecha de finalización | Observaciones |
+|:------:|:------:|:---------------------:|--------------|
+| Modelos POO (7 clases) | ✅ Completado | 10-jul | Herencia, encapsulamiento, polimorfismo |
+| Estructuras de datos (3) | ✅ Completado | 10-jul | LinkedList, Queue, Stack |
+| Algoritmos (6) | ✅ Completado | 10-jul | Bubble, Insertion, Merge, Quick, Lineal, Binaria |
+| Base de datos SQLite (4 tablas) | ✅ Completado | 11-jul | socios, libros, prestamos, reservas |
+| Repositorios CRUD (4) | ✅ Completado | 14-jul | socio_repo, libro_repo, prestamo_repo, reserva_repo |
+| GUI Tkinter (19 funciones) | ✅ Completado | 17-jul | Formularios: socios, libros, préstamos, reservas |
+| Pruebas unitarias (11) | ✅ Completado | 18-jul | Todos los tests pasan |
+| Manual de usuario | ✅ Completado | 20-jul | 8 secciones + 8 capturas de pantalla |
+| Formato PDF académico | ✅ Completado | 20-jul | Portada, header/footer, tabla elegante |
+| **Defensa oral** | ⏳ **Pendiente** | **27-jul** | **Semana 15** |
 
 ---
 
