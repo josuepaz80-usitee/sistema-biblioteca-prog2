@@ -25,7 +25,7 @@ from src.algorithms.sorting import bubble_sort, insertion_sort, merge_sort, quic
 from src.algorithms.search import busqueda_lineal, busqueda_binaria
 
 
-def probar_personas():
+def test_personas():
     """Prueba: herencia, encapsulamiento y polimorfismo"""
     print("=== PRUEBA: Modelos POO ===")
 
@@ -56,7 +56,7 @@ def probar_personas():
     print("  Abstraccion OK: Persona define el contrato tipo_socio()")
 
 
-def probar_libro():
+def test_libro():
     """Prueba: prestamo y devolucion de ejemplares"""
     print("\n=== PRUEBA: Libro ===")
     libro = Libro("978-3-16-148410-0", "Python para Todos", "John Doe",
@@ -81,7 +81,7 @@ def probar_libro():
     print("  OK: Prestamo y devolucion funcionan correctamente")
 
 
-def probar_algoritmos():
+def test_algoritmos():
     """Prueba: algoritmos de ordenamiento y busqueda"""
     print("\n=== PRUEBA: Algoritmos ===")
     datos = [5, 3, 8, 1, 9, 2]
@@ -119,7 +119,7 @@ def probar_algoritmos():
     print("  Todos los algoritmos funcionan correctamente")
 
 
-def probar_estructuras():
+def test_estructuras():
     """Prueba: LinkedList, Queue y Stack"""
     print("\n=== PRUEBA: Estructuras de Datos ===")
 
@@ -160,7 +160,7 @@ def probar_estructuras():
     print("  Pila LIFO (deshacer operacion): OK")
 
 
-def probar_database():
+def test_database():
     """Prueba: conexion a SQLite, CRUD prestamos y reservas"""
     print("\n=== PRUEBA: Base de Datos SQLite ===")
     from src.database.db_manager import DatabaseManager
@@ -241,9 +241,9 @@ def probar_database():
 
 
 if __name__ == "__main__":
-    probar_personas()
-    probar_libro()
-    probar_algoritmos()
-    probar_estructuras()
-    probar_database()
+    test_personas()
+    test_libro()
+    test_algoritmos()
+    test_estructuras()
+    test_database()
     print("\n=== TODAS LAS PRUEBAS PASARON ===")

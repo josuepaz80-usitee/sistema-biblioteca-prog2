@@ -85,50 +85,6 @@ Aparecerá la ventana principal del sistema lista para usar.
 > - **Linux (Debian/Ubuntu):** `sudo apt install python3-tk`
 > - **Linux (Fedora):** `sudo dnf install python3-tkinter`
 
----
-
-## 3. Instalación
-
-### 3.1 Descargar el proyecto
-
-**Opción 1 — Clonar con Git (recomendado):**
-```bash
-git clone https://github.com/josuepaz80-usitee/sistema-biblioteca-prog2.git
-cd sistema-biblioteca-prog2
-```
-
-**Opción 2 — Descargar ZIP:**
-1. Ir a https://github.com/josuepaz80-usitee/sistema-biblioteca-prog2
-2. Hacer clic en el botón verde **"<> Code"** → **"Download ZIP"**
-3. Descomprimir el archivo en una carpeta de su PC
-
-### 3.2 Crear la base de datos
-
-Ejecute el siguiente comando en la terminal dentro de la carpeta del proyecto:
-
-```bash
-python seed.py
-```
-
-Este comando crea el archivo `db/biblioteca.db` con:
-- 7 socios de prueba (estudiantes y docentes)
-- 8 libros en el catálogo
-- Sin préstamos ni reservas registrados
-
-### 3.3 Iniciar el sistema
-
-```bash
-python main.py
-```
-
-Aparecerá la ventana principal del sistema lista para usar.
-
-> **Nota:** Si aparece un error de `ModuleNotFoundError: No module named 'tkinter'`, instale Tkinter:
-> - **Windows/macOS:** Viene incluido con Python. Reinstale Python y asegúrese de marcar la casilla "tcl/tk and IDLE".
-> - **Linux (Debian/Ubuntu):** `sudo apt install python3-tk`
-> - **Linux (Fedora):** `sudo dnf install python3-tkinter`
-
----
 
 ## 4. Guía de Uso
 

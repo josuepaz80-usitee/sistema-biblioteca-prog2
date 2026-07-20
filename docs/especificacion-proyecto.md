@@ -370,9 +370,9 @@ El proyecto se aloja en GitHub bajo el control de versiones Git.
 
 ---
 
-## 10. Plan de Trabajo y Cronograma
+## 9.1 Plan de Trabajo y Cronograma
 
-### 10.1 Diagrama de Gantt
+### 9.1.1 Diagrama de Gantt
 
 ```
 Julio 2026
@@ -423,7 +423,7 @@ Defensa oral           |       |        |        |   ●
 ───────────────────────────────────────────────────────
 ```
 
-### 10.2 Prioridades para la Semana 13 (13-17 julio)
+### 9.1.2 Prioridades para la Semana 13 (13-17 julio)
 
 | Prioridad | Tarea | Responsable |
 |:---------:|-------|-------------|
