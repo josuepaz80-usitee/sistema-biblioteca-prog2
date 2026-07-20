@@ -164,10 +164,10 @@ Se utiliza el **Modelo Incremental**, que consiste en desarrollar el sistema por
 | Herramienta | Versión | Propósito |
 |-------------|:-------:|-----------|
 | Python | 3.11+ | Lenguaje de programación |
-| Visual Studio Code | Última | Editor de código con extensión Python (Microsoft) y GitLens |
-| Tkinter | 8.6 | Biblioteca de interfaz gráfica (incluida en Python) |
-| SQLite3 | 3.x | Motor de base de datos embebido |
-| DB Browser for SQLite | 3.x | Administración visual de la BD |
+| VS Code | Última | Editor de código con Python |
+| Tkinter | 8.6 | Biblioteca gráfica (incluida) |
+| SQLite3 | 3.x | Motor de base de datos |
+| DB Browser | 3.x | Administración visual de BD |
 | Git | 2.47+ | Control de versiones |
 | GitHub | — | Repositorio remoto |
 
@@ -178,102 +178,107 @@ Se utiliza el **Modelo Incremental**, que consiste en desarrollar el sistema por
 ### 7.1 Diagrama de Clases (UML)
 
 ```
-┌────────────────────────────────────────┐
-│              Persona                    │ ◄── Abstracción
-│  - __cedula: str                       │     (raise NotImplementedError)
-│  - __nombre: str                       │
-│  - __apellido: str                     │
-│  - __telefono: str                     │
-├────────────────────────────────────────┤
-│  + get_cedula(): str                   │
-│  + get_nombre_completo(): str          │
-│  + tipo_socio(): str                   │ ◄── Polimorfismo
-└────────────┬───────────────────────────┘
-             │  Herencia
-    ┌────────┴────────┐
-    ▼                 ▼
-┌─────────────┐ ┌─────────────┐
-│  Estudiante │ │   Docente   │
-├─────────────┤ ├─────────────┤
-│ - __carrera │ │ - __depto   │
-│ - __semestre│ │             │
-├─────────────┤ ├─────────────┤
-│ + tipo_socio│ │ + tipo_socio│
-│ = Estudiante│ │ = Docente   │
-└─────────────┘ └─────────────┘
-        │                │
-        └───────┬────────┘
-                ▼
-        ┌──────────────┐
-        │    Socio     │ ◄── Wrapper polimórfico
-        │ - __persona  │      contiene Estudiante o Docente
-        └──────────────┘
++----------------------------------------+
+|              Persona                    | ◄-- Abstracción
+|  - __cedula: str                       |     (raise NotImplementedError)
+|  - __nombre: str                       |
+|  - __apellido: str                     |
+|  - __telefono: str                     |
++----------------------------------------+
+|  + get_cedula(): str                   |
+|  + get_nombre_completo(): str          |
+|  + tipo_socio(): str                   | ◄-- Polimorfismo
++------------+---------------------------+
+             |  Herencia
+    +--------+--------+
+    V                 V
++-------------+ +-------------+
+|  Estudiante | |   Docente   |
++-------------+ +-------------+
+| - __carrera | | - __depto   |
+| - __semestre| |             |
++-------------+ +-------------+
+| + tipo_socio| | + tipo_socio|
+| = Estudiante| | = Docente   |
++-------------+ +-------------+
+        |                |
+        +-------+--------+
+                V
+        +--------------+
+        |    Socio     | ◄-- Wrapper polimórfico
+        | - __persona  |      contiene Estudiante o Docente
+        +--------------+
 
-┌──────────────────┐      ┌──────────────────┐
-│      Libro       │      │    Prestamo      │
-├──────────────────┤      ├──────────────────┤
-│ - __isbn         │      │ - __socio        │──► Socio
-│ - __titulo       │      │ - __libro        │──► Libro
-│ - __autor        │      │ - __fecha_prest  │
-│ - __ejemplares   │      │ - __fecha_dev    │
-│ - __disponibles  │      └──────────────────┘
-├──────────────────┤
-│ + prestar()      │      ┌──────────────────┐
-│ + devolver()     │      │    Reserva       │
-│ + esta_disp()    │      ├──────────────────┤
-└──────────────────┘      │ - __socio        │──► Socio
-                          │ - __libro        │──► Libro
-                          │ - __fecha        │
-                          │ - __activa       │
-                          └──────────────────┘
++------------------+      +------------------+
+|      Libro       |      |    Prestamo      |
++------------------+      +------------------+
+| - __isbn         |      | - __socio        |---> Socio
+| - __titulo       |      | - __libro        |---> Libro
+| - __autor        |      | - __fecha_prest  |
+| - __ejemplares   |      | - __fecha_dev    |
+| - __disponibles  |      +------------------+
++------------------+
+| + prestar()      |      +------------------+
+| + devolver()     |      |    Reserva       |
+| + esta_disp()    |      +------------------+
++------------------+      | - __socio        |---> Socio
+                          | - __libro        |---> Libro
+                          | - __fecha        |
+                          | - __activa       |
+                          +------------------+
 
 Estructuras de Datos:
-┌──────────────┐  ┌──────────────┐  ┌──────────────┐
-│ LinkedList   │  │    Queue     │  │    Stack     │
-│ (Nodo → Nodo)│  │  (FIFO)     │  │  (LIFO)      │
-│ append()     │  │ enqueue()   │  │ push()       │
-│ prepend()    │  │ dequeue()   │  │ pop()        │
-│ remove()     │  │ peek()      │  │ peek()       │
-│ find()       │  │             │  │              │
-└──────────────┘  └──────────────┘  └──────────────┘
++--------------+  +--------------+  +--------------+
+| LinkedList   |  |    Queue     |  |    Stack     |
+| (Nodo → Nodo)|  |  (FIFO)     |  |  (LIFO)      |
+| append()     |  | enqueue()   |  | push()       |
+| prepend()    |  | dequeue()   |  | pop()        |
+| remove()     |  | peek()      |  | peek()       |
+| find()       |  |             |  |              |
++--------------+  +--------------+  +--------------+
 
 Algoritmos:
-┌──────────────────┐  ┌──────────────────────┐
-│    Búsqueda      │  │   Ordenamiento       │
-│ Lineal (O(n))    │  │ Bubble (O(n²))       │
-│ Binaria (O(log n))│  │ Insertion (O(n²))   │
-└──────────────────┘  │ Merge (O(n log n))   │
-                      │ Quick (O(n log n))   │
-                      └──────────────────────┘
++------------------+  +----------------------+
+|    Búsqueda      |  |   Ordenamiento       |
+| Lineal (O(n))    |  | Bubble (O(n²))       |
+| Binaria (O(log n))|  | Insertion (O(n²))   |
++------------------+  | Merge (O(n log n))   |
+                      | Quick (O(n log n))   |
+                      +----------------------+
 ```
 
 ### 7.2 Modelo Entidad-Relación (Base de Datos)
 
 ```
-┌────────────────────┐       ┌────────────────────────┐
-│      socios        │       │       libros           │
-├────────────────────┤       ├────────────────────────┤
-│ PK  cedula: TEXT   │       │ PK  isbn: TEXT         │
-│     nombre: TEXT   │       │     titulo: TEXT       │
-│     apellido: TEXT │       │     autor: TEXT        │
-│     tipo: TEXT     │       │     editorial: TEXT    │
-│     carrera: TEXT  │       │     anio: INTEGER      │
-│     semestre: INT  │       │     ejemplares: INT    │
-│     telefono: TEXT │       │     disponibles: INT   │
-└────────┬───────────┘       └──────────┬─────────────┘
-         │                              │
-         │  ┌───────────────────────────┘
-         │  │
-         ▼  ▼
-┌────────────────────┐       ┌────────────────────────┐
-│     prestamos      │       │       reservas          │
-├────────────────────┤       ├────────────────────────┤
-│ PK  id: INTEGER    │       │ PK  id: INTEGER        │
-│ FK  cedula_socio   │──►    │ FK  cedula_socio       │──► socios
-│ FK  isbn_libro     │──►    │ FK  isbn_libro         │──► libros
-│     fecha_prestamo │       │     fecha_reserva      │
-│     fecha_devuelto │       │     activa: INTEGER    │
-└────────────────────┘       └────────────────────────┘
++-----------------------+         +---------------------------+
+|       socios          |         |         libros             |
++-----------------------+         +---------------------------+
+| PK cedula: TEXT       |         | PK isbn: TEXT              |
+|     nombre: TEXT      |         |     titulo: TEXT           |
+|     apellido: TEXT    |         |     autor: TEXT            |
+|     tipo: TEXT        |         |     editorial: TEXT        |
+|     carrera: TEXT     |         |     anio: INTEGER          |
+|     semestre: INT     |         |     ejemplares: INT        |
+|     telefono: TEXT    |         |     disponibles: INT       |
++-----------+-----------+         +-------------+-------------+
+            |                                   |
+            |                                   |
+            +----------+------------------------+
+                       |
+              +--------+--------+
+              |    prestamos    |        |      reservas      |
+              | PK id: INTEGER  |        | PK id: INTEGER     |
+              | FK cedula_socio |----    | FK cedula_socio    |---- socios
+              | FK isbn_libro   |----    | FK isbn_libro      |---- libros
+              | fecha_prestamo  |        | fecha_reserva      |
+              | fecha_devuelto  |        | activa: INTEGER    |
+              +-----------------+        +--------------------+
+
+Relaciones:
+- socios (1) -> (N) prestamos   : Un socio puede tener 0 o muchos prestamos
+- socios (1) -> (N) reservas    : Un socio puede tener 0 o muchas reservas
+- libros (1) -> (N) prestamos   : Un libro puede estar en 0 o muchos prestamos
+- libros (1) -> (N) reservas    : Un libro puede tener 0 o muchas reservas
 ```
 
 ---
