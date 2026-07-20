@@ -594,16 +594,148 @@ def realizar_prestamo(self):
 |-----------|:----------:|:-------------:|:---------:|:-------:|
 | **Bubble Sort** | O(n) | O(n²) | O(n²) | O(1) |
 | **Insertion Sort** | O(n) | O(n²) | O(n²) | O(1) |
-| **Merge Sort** | O(n log n) | O(n log n) | O(n log n) | O(n) |
-| **Quick Sort** | O(n log n) | O(n log n) | O(n²) | O(log n) |
-| **Búsqueda Lineal** | O(1) | O(n) | O(n) | O(1) |
-| **Búsqueda Binaria** | O(1) | O(log n) | O(log n) | O(1) |
+| Merge Sort | O(n log n) | O(n log n) | O(n log n) | O(n) |
+| Quick Sort | O(n log n) | O(n log n) | O(n²) | O(log n) |
+| Búsqueda Lineal | O(1) | O(n) | O(n) | O(1) |
+| Búsqueda Binaria | O(1) | O(log n) | O(log n) | O(1) |
 
 **Explicación:** Bubble Sort e Insertion Sort son O(n²) en el peor caso porque comparan cada elemento con todos los demás. Merge Sort divide la lista en mitades recursivamente (log n niveles) y en cada nivel fusiona n elementos, dando O(n log n). Quick Sort promedia O(n log n) pero puede degenerar a O(n²) si el pivote es mal elegido. Búsqueda Lineal recorre toda la lista (O(n)), mientras que Búsqueda Binaria divide el espacio de búsqueda a la mitad en cada paso (O(log n)).
 
 ---
 
-## 12. Pruebas Realizadas
+## 12. Diseño de la Base de Datos
+
+### 12.1 Modelo Entidad-Relación
+
+```
+┌──────────────────┐         ┌──────────────────┐
+│     socios       │         │     libros       │
+├──────────────────┤         ├──────────────────┤
+│PK cedula: TEXT   │         │PK isbn: TEXT     │
+│ nombre: TEXT     │         │ titulo: TEXT     │
+│ apellido: TEXT   │         │ autor: TEXT      │
+│ tipo: TEXT       │         │ editorial: TEXT  │
+│ carrera_depto:  │         │ anio: INTEGER    │
+│   TEXT           │         │ ejemplares: INT  │
+│ semestre: INT    │         │ disponibles: INT │
+│ telefono: TEXT   │         └────────┬─────────┘
+└────────┬─────────┘                   │
+         │                            │
+         │ 1                          │ 1
+         │                            │
+         │ FK                         │ FK
+         ▼                            ▼
+┌──────────────────────────────────────────────┐
+│               prestamos                       │
+├──────────────────────────────────────────────┤
+│PK id: INTEGER AUTOINCREMENT                  │
+│FK cedula_socio → socios(cedula)              │
+│FK isbn_libro → libros(isbn)                  │
+│ fecha_prestamo: TEXT NOT NULL                 │
+│ fecha_devolucion: TEXT (NULL = pendiente)     │
+└──────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────┐
+│               reservas                        │
+├──────────────────────────────────────────────┤
+│PK id: INTEGER AUTOINCREMENT                  │
+│FK cedula_socio → socios(cedula)              │
+│FK isbn_libro → libros(isbn)                  │
+│ fecha_reserva: TEXT NOT NULL                  │
+│ activa: INTEGER DEFAULT 1                     │
+└──────────────────────────────────────────────┘
+```
+
+*Nota: Cada socio puede tener 0 o muchos préstamos y 0 o muchas reservas.
+Cada libro puede estar en 0 o muchos préstamos y 0 o muchas reservas.*
+
+### 12.2 Esquema SQL (DDL)
+
+```sql
+CREATE TABLE IF NOT EXISTS socios (
+    cedula TEXT PRIMARY KEY,
+    nombre TEXT NOT NULL,
+    apellido TEXT NOT NULL,
+    tipo TEXT NOT NULL CHECK(tipo IN ('Estudiante', 'Docente')),
+    carrera_departamento TEXT,
+    semestre INTEGER,
+    telefono TEXT
+);
+
+CREATE TABLE IF NOT EXISTS libros (
+    isbn TEXT PRIMARY KEY,
+    titulo TEXT NOT NULL,
+    autor TEXT NOT NULL,
+    editorial TEXT,
+    anio INTEGER,
+    ejemplares INTEGER DEFAULT 1,
+    disponibles INTEGER DEFAULT 1
+);
+
+CREATE TABLE IF NOT EXISTS prestamos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cedula_socio TEXT NOT NULL,
+    isbn_libro TEXT NOT NULL,
+    fecha_prestamo TEXT NOT NULL,
+    fecha_devolucion TEXT,
+    FOREIGN KEY (cedula_socio) REFERENCES socios(cedula),
+    FOREIGN KEY (isbn_libro) REFERENCES libros(isbn)
+);
+
+CREATE TABLE IF NOT EXISTS reservas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cedula_socio TEXT NOT NULL,
+    isbn_libro TEXT NOT NULL,
+    fecha_reserva TEXT NOT NULL,
+    activa INTEGER DEFAULT 1,
+    FOREIGN KEY (cedula_socio) REFERENCES socios(cedula),
+    FOREIGN KEY (isbn_libro) REFERENCES libros(isbn)
+);
+```
+
+### 12.3 Administración con DB Browser for SQLite
+
+El archivo `db/biblioteca.db` se crea automáticamente al ejecutar `seed.py`. Para administrarlo visualmente:
+
+1. Descargar e instalar [DB Browser for SQLite](https://sqlitebrowser.org/dl/)
+2. Abrir el programa y hacer clic en **"Abrir base de datos"**
+3. Seleccionar `db/biblioteca.db` desde la carpeta del proyecto
+4. Navegar por las pestañas:
+   - **"Estructura de la BD"** — ver las 4 tablas, columnas, tipos e índices
+   - **"Datos"** — ver y editar registros de cada tabla
+   - **"Ejecutar SQL"** — ejecutar consultas personalizadas
+
+> **Importante:** Durante la defensa, el docente puede pedir que se muestre la base de datos en DB Browser. Se recomienda tenerlo instalado y saber navegar las tablas, mostrar relaciones y ejecutar consultas SELECT básicas.
+
+### 12.4 Consultas SQL de ejemplo
+
+```sql
+-- Listar todos los préstamos pendientes con datos del socio y libro
+SELECT p.id, s.nombre || ' ' || s.apellido AS socio, l.titulo,
+       p.fecha_prestamo
+FROM prestamos p
+JOIN socios s ON p.cedula_socio = s.cedula
+JOIN libros l ON p.isbn_libro = l.isbn
+WHERE p.fecha_devolucion IS NULL;
+
+-- Contar cuántos libros prestados tiene cada socio
+SELECT s.cedula, s.nombre, s.apellido, COUNT(p.id) AS prestamos_activos
+FROM socios s
+LEFT JOIN prestamos p ON s.cedula = p.cedula_socio AND p.fecha_devolucion IS NULL
+GROUP BY s.cedula;
+
+-- Libros más reservados (cola de espera)
+SELECT l.isbn, l.titulo, COUNT(r.id) AS reservas_activas
+FROM libros l
+JOIN reservas r ON l.isbn = r.isbn_libro
+WHERE r.activa = 1
+GROUP BY l.isbn
+ORDER BY reservas_activas DESC;
+```
+
+---
+
+## 13. Pruebas Realizadas
 
 Todas las pruebas se ejecutan con `python tests/test_models.py` y cubren:
 
@@ -623,7 +755,7 @@ Todas las pruebas se ejecutan con `python tests/test_models.py` y cubren:
 
 ---
 
-## 13. Conclusiones y Recomendaciones
+## 14. Conclusiones y Recomendaciones
 
 ### Conclusiones
 
@@ -645,7 +777,7 @@ Todas las pruebas se ejecutan con `python tests/test_models.py` y cubren:
 
 ---
 
-## 14. Bibliografía (APA 7ª ed.)
+## 15. Bibliografía (APA 7ª ed.)
 
 1. Grayson, J. E. (2000). *Python and Tkinter programming*. Manning Publications. ISBN: 978-1884779813
 
@@ -659,9 +791,80 @@ Todas las pruebas se ejecutan con `python tests/test_models.py` y cubren:
 
 ---
 
-## 15. Anexos
+## 16. Anexos
 
-### Anexo A — Enlaces del proyecto
+### 16.1 Anexo A — Estructura y datos de la base de datos
+
+#### Esquema SQL (DDL)
+
+```sql
+CREATE TABLE socios(
+    cedula TEXT PRIMARY KEY,
+    nombre TEXT NOT NULL,
+    apellido TEXT NOT NULL,
+    tipo TEXT NOT NULL CHECK(tipo IN ('Estudiante', 'Docente')),
+    carrera_departamento TEXT,
+    semestre INTEGER,
+    telefono TEXT
+);
+
+CREATE TABLE libros(
+    isbn TEXT PRIMARY KEY,
+    titulo TEXT NOT NULL,
+    autor TEXT NOT NULL,
+    editorial TEXT,
+    anio INTEGER,
+    ejemplares INTEGER DEFAULT 1,
+    disponibles INTEGER DEFAULT 1
+);
+
+CREATE TABLE prestamos(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cedula_socio TEXT NOT NULL,
+    isbn_libro TEXT NOT NULL,
+    fecha_prestamo TEXT NOT NULL,
+    fecha_devolucion TEXT,
+    FOREIGN KEY(cedula_socio) REFERENCES socios(cedula),
+    FOREIGN KEY(isbn_libro) REFERENCES libros(isbn)
+);
+
+CREATE TABLE reservas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cedula_socio TEXT NOT NULL,
+    isbn_libro TEXT NOT NULL,
+    fecha_reserva TEXT NOT NULL,
+    activa INTEGER DEFAULT 1,
+    FOREIGN KEY(cedula_socio) REFERENCES socios(cedula),
+    FOREIGN KEY(isbn_libro) REFERENCES libros(isbn)
+);
+```
+
+#### Datos de prueba (7 socios + 8 libros)
+
+**socios:**
+| cedula | nombre | apellido | tipo | carrera_departamento | semestre |
+|--------|--------|----------|------|---------------------|:--------:|
+| 0956789012 | Henry | Pazmino | Estudiante | Computacion | 3 |
+| 0956789013 | Jodie | Parrales | Estudiante | Computacion | 3 |
+| 0956789014 | Cindy | Ayovi | Estudiante | Computacion | 3 |
+| 0956789015 | Cesar | Gonzales | Estudiante | Computacion | 3 |
+| 0956789016 | Mayra | Vera | Estudiante | Computacion | 3 |
+| 0912345678 | Miguel | Velez | Docente | Sistemas | — |
+| 0912345679 | Bryan | Velez | Docente | Computacion | — |
+
+**libros:**
+| isbn | titulo | autor | ejemplares | disponibles |
+|------|--------|-------|:----------:|:-----------:|
+| 978-0307474728 | Cien Años de Soledad | G. García Márquez | 3 | 3 |
+| 978-0156012195 | El Principito | A. de Saint-Exupéry | 5 | 5 |
+| 978-8420412146 | Don Quijote de la Mancha | M. de Cervantes | 2 | 2 |
+| 978-8415552024 | Introducción a la Programación con Python | L. Joyanes | 4 | 4 |
+| 978-0201000238 | Estructuras de Datos y Algoritmos | A. V. Aho | 2 | 2 |
+| 978-8478290855 | Base de Datos SQL | C. J. Date | 3 | 3 |
+| 978-6073205337 | Redes de Computadoras | A. S. Tanenbaum | 2 | 2 |
+| 978-6073206037 | Ingeniería del Software | I. Sommerville | 2 | 2 |
+
+### 16.2 Anexo B — Enlaces del proyecto
 
 | Recurso | URL |
 |---------|-----|
@@ -670,7 +873,7 @@ Todas las pruebas se ejecutan con `python tests/test_models.py` y cubren:
 | Manual de usuario | `docs/manual-usuario.md` |
 | Diagrama de Gantt | `docs/gantt.png` |
 
-### Anexo B — Stack tecnológico
+### 16.3 Anexo C — Stack tecnológico
 
 | Herramienta | Versión | Uso |
 |-------------|:-------:|-----|
