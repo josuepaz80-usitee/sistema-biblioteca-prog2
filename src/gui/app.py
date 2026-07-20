@@ -15,6 +15,8 @@ from datetime import date
 from src.database.db_manager import DatabaseManager
 from src.database.socio_repo import SocioRepository
 from src.database.libro_repo import LibroRepository
+from src.database.prestamo_repo import PrestamoRepository
+from src.database.reserva_repo import ReservaRepository
 
 
 class BibliotecaApp:
@@ -28,6 +30,8 @@ class BibliotecaApp:
         self.__db.create_tables()
         self.__socio_repo = SocioRepository(self.__db)
         self.__libro_repo = LibroRepository(self.__db)
+        self.__prestamo_repo = PrestamoRepository(self.__db)
+        self.__reserva_repo = ReservaRepository(self.__db)
 
         # Crear ventana principal
         self.root = tk.Tk()
@@ -428,29 +432,319 @@ class BibliotecaApp:
             messagebox.showerror("Error BD", str(e), parent=ventana)
 
     # ============================================================
-    # STUBS: Prestamos, Devoluciones y Reservas
-    # (pendientes para completar en Semana 14)
+    # FORMULARIOS: Prestamos, Devoluciones y Reservas
     # ============================================================
 
-    # PASO #13 REALIZAR PRESTAMO (pendiente)
+    # PASO #13 REALIZAR PRESTAMO
     def realizar_prestamo(self):
-        messagebox.showinfo("Prestamo", "Funcionalidad en construccion")
+        """Abre formulario para registrar un nuevo prestamo"""
+        ventana = tk.Toplevel(self.root)
+        ventana.title("Realizar Prestamo")
+        ventana.geometry("480x350")
+        ventana.configure(bg="#f0f0f0")
+        ventana.transient(self.root)
+        ventana.grab_set()
 
-    # PASO #14 REGISTRAR DEVOLUCION (pendiente)
+        ttk.Label(ventana, text="REALIZAR PRESTAMO", font=("Arial", 14, "bold"))\
+            .pack(pady=10)
+
+        frame = ttk.Frame(ventana, padding=15)
+        frame.pack(fill=tk.BOTH, expand=True)
+
+        # Cedula del socio
+        ttk.Label(frame, text="Cedula del Socio:")\
+            .grid(row=0, column=0, sticky="w", pady=3)
+        entry_cedula = ttk.Entry(frame, width=30)
+        entry_cedula.grid(row=0, column=1, pady=3)
+
+        # ISBN del libro
+        ttk.Label(frame, text="ISBN del Libro:")\
+            .grid(row=1, column=0, sticky="w", pady=3)
+        entry_isbn = ttk.Entry(frame, width=30)
+        entry_isbn.grid(row=1, column=1, pady=3)
+
+        ttk.Label(frame, text="", font=("Arial", 8)).grid(row=2, column=0, columnspan=2, pady=2)
+        ttk.Label(frame, text="Busque socio y libro en los menus correspondientes", 
+                  font=("Arial", 8, "italic"), foreground="gray")\
+            .grid(row=3, column=0, columnspan=2, pady=2)
+
+        def guardar_prestamo():
+            cedula = entry_cedula.get().strip()
+            isbn = entry_isbn.get().strip()
+
+            if not cedula or not isbn:
+                messagebox.showerror("Error", "Cedula e ISBN son obligatorios",
+                                     parent=ventana)
+                return
+
+            # Verificar que el socio existe
+            socio = self.__socio_repo.obtener_por_cedula(cedula)
+            if not socio:
+                messagebox.showerror("Error", "Socio no encontrado. Verifique la cedula",
+                                     parent=ventana)
+                return
+
+            # Verificar que el libro existe y tiene ejemplares disponibles
+            libro = self.__libro_repo.obtener_por_isbn(isbn)
+            if not libro:
+                messagebox.showerror("Error", "Libro no encontrado. Verifique el ISBN",
+                                     parent=ventana)
+                return
+
+            if libro[6] < 1:  # disponibles
+                messagebox.showerror("Error", "No hay ejemplares disponibles de este libro",
+                                     parent=ventana)
+                return
+
+            try:
+                fecha = str(date.today())
+                # Registrar prestamo
+                self.__prestamo_repo.insertar(cedula, isbn, fecha)
+                # Reducir disponibles
+                self.__libro_repo.actualizar_disponibles(isbn, libro[6] - 1)
+                messagebox.showinfo("Exito", "Prestamo registrado correctamente",
+                                    parent=ventana)
+                ventana.destroy()
+            except Exception as e:
+                messagebox.showerror("Error BD", str(e), parent=ventana)
+
+        ttk.Button(frame, text="Confirmar Prestamo", command=guardar_prestamo)\
+            .grid(row=4, column=0, columnspan=2, pady=15)
+
+    # PASO #14 REGISTRAR DEVOLUCION
     def registrar_devolucion(self):
-        messagebox.showinfo("Devolucion", "Funcionalidad en construccion")
+        """Abre formulario para registrar devolucion de un prestamo"""
+        ventana = tk.Toplevel(self.root)
+        ventana.title("Registrar Devolucion")
+        ventana.geometry("480x350")
+        ventana.configure(bg="#f0f0f0")
+        ventana.transient(self.root)
+        ventana.grab_set()
 
-    # PASO #15 VER PRESTAMOS (pendiente)
+        ttk.Label(ventana, text="REGISTRAR DEVOLUCION", font=("Arial", 14, "bold"))\
+            .pack(pady=10)
+
+        frame = ttk.Frame(ventana, padding=15)
+        frame.pack(fill=tk.BOTH, expand=True)
+
+        ttk.Label(frame, text="ID del Prestamo:")\
+            .grid(row=0, column=0, sticky="w", pady=3)
+        entry_id = ttk.Entry(frame, width=30)
+        entry_id.grid(row=0, column=1, pady=3)
+
+        ttk.Label(frame, text="ISBN del Libro:")\
+            .grid(row=1, column=0, sticky="w", pady=3)
+        entry_isbn = ttk.Entry(frame, width=30)
+        entry_isbn.grid(row=1, column=1, pady=3)
+
+        ttk.Label(frame, text="", font=("Arial", 8)).grid(row=2, column=0, columnspan=2, pady=2)
+        ttk.Label(frame, text="Ver 'Prestamos' para consultar el ID de cada prestamo",
+                  font=("Arial", 8, "italic"), foreground="gray")\
+            .grid(row=3, column=0, columnspan=2, pady=2)
+
+        def guardar_devolucion():
+            prestamo_id_texto = entry_id.get().strip()
+            isbn = entry_isbn.get().strip()
+
+            if not prestamo_id_texto or not isbn:
+                messagebox.showerror("Error", "ID del prestamo e ISBN son obligatorios",
+                                     parent=ventana)
+                return
+
+            try:
+                prestamo_id = int(prestamo_id_texto)
+            except ValueError:
+                messagebox.showerror("Error", "ID debe ser un numero entero",
+                                     parent=ventana)
+                return
+
+            # Verificar que el prestamo existe y esta pendiente
+            prestamo = self.__prestamo_repo.obtener_por_id(prestamo_id)
+            if not prestamo:
+                messagebox.showerror("Error", "Prestamo no encontrado",
+                                     parent=ventana)
+                return
+
+            if prestamo[3] is not None:  # fecha_devolucion
+                messagebox.showinfo("Info", "Este prestamo ya fue devuelto",
+                                    parent=ventana)
+                return
+
+            try:
+                fecha = str(date.today())
+                self.__prestamo_repo.registrar_devolucion(prestamo_id, fecha)
+                # Incrementar disponibles del libro
+                libro = self.__libro_repo.obtener_por_isbn(isbn)
+                if libro:
+                    self.__libro_repo.actualizar_disponibles(
+                        isbn, libro[6] + 1)
+                messagebox.showinfo("Exito", "Devolucion registrada correctamente",
+                                    parent=ventana)
+                ventana.destroy()
+            except Exception as e:
+                messagebox.showerror("Error BD", str(e), parent=ventana)
+
+        ttk.Button(frame, text="Confirmar Devolucion", command=guardar_devolucion)\
+            .grid(row=4, column=0, columnspan=2, pady=15)
+
+    # PASO #15 VER PRESTAMOS
     def ver_prestamos(self):
-        messagebox.showinfo("Prestamos", "Funcionalidad en construccion")
+        """Muestra tabla con todos los prestamos"""
+        ventana = tk.Toplevel(self.root)
+        ventana.title("Lista de Prestamos")
+        ventana.geometry("750x400")
+        ventana.transient(self.root)
+        ventana.grab_set()
 
-    # PASO #16 NUEVA RESERVA (pendiente)
+        ttk.Label(ventana, text="LISTA DE PRESTAMOS", font=("Arial", 14, "bold"))\
+            .pack(pady=10)
+
+        frame = ttk.Frame(ventana, padding=10)
+        frame.pack(fill=tk.BOTH, expand=True)
+
+        scroll_y = ttk.Scrollbar(frame, orient=tk.VERTICAL)
+        scroll_x = ttk.Scrollbar(frame, orient=tk.HORIZONTAL)
+
+        tree = ttk.Treeview(frame,
+                            columns=("id", "cedula", "isbn", "fecha_prestamo",
+                                     "fecha_devolucion"),
+                            show="headings",
+                            yscrollcommand=scroll_y.set,
+                            xscrollcommand=scroll_x.set)
+
+        scroll_y.config(command=tree.yview)
+        scroll_x.config(command=tree.xview)
+
+        tree.heading("id", text="ID")
+        tree.heading("cedula", text="Cedula Socio")
+        tree.heading("isbn", text="ISBN")
+        tree.heading("fecha_prestamo", text="Fecha Prestamo")
+        tree.heading("fecha_devolucion", text="Fecha Devolucion")
+
+        tree.column("id", width=50)
+        tree.column("cedula", width=120)
+        tree.column("isbn", width=120)
+        tree.column("fecha_prestamo", width=130)
+        tree.column("fecha_devolucion", width=130)
+
+        tree.grid(row=0, column=0, sticky="nsew")
+        scroll_y.grid(row=0, column=1, sticky="ns")
+        scroll_x.grid(row=1, column=0, sticky="ew")
+        frame.grid_rowconfigure(0, weight=1)
+        frame.grid_columnconfigure(0, weight=1)
+
+        try:
+            prestamos = self.__prestamo_repo.listar_todos()
+            for p in prestamos:
+                dev = p[3] if p[3] else "Pendiente"
+                tree.insert("", tk.END, values=(p[0], p[1], p[2], p[3], dev))
+        except Exception as e:
+            messagebox.showerror("Error BD", str(e), parent=ventana)
+
+    # PASO #16 NUEVA RESERVA
     def nueva_reserva(self):
-        messagebox.showinfo("Reserva", "Funcionalidad en construccion")
+        """Abre formulario para crear una nueva reserva"""
+        ventana = tk.Toplevel(self.root)
+        ventana.title("Nueva Reserva")
+        ventana.geometry("480x300")
+        ventana.configure(bg="#f0f0f0")
+        ventana.transient(self.root)
+        ventana.grab_set()
 
-    # PASO #17 VER RESERVAS (pendiente)
+        ttk.Label(ventana, text="NUEVA RESERVA", font=("Arial", 14, "bold"))\
+            .pack(pady=10)
+
+        frame = ttk.Frame(ventana, padding=15)
+        frame.pack(fill=tk.BOTH, expand=True)
+
+        ttk.Label(frame, text="Cedula del Socio:")\
+            .grid(row=0, column=0, sticky="w", pady=3)
+        entry_cedula = ttk.Entry(frame, width=30)
+        entry_cedula.grid(row=0, column=1, pady=3)
+
+        ttk.Label(frame, text="ISBN del Libro:")\
+            .grid(row=1, column=0, sticky="w", pady=3)
+        entry_isbn = ttk.Entry(frame, width=30)
+        entry_isbn.grid(row=1, column=1, pady=3)
+
+        ttk.Label(frame, text="", font=("Arial", 8)).grid(row=2, column=0, columnspan=2, pady=2)
+        ttk.Label(frame, text="Se reserva cuando no hay ejemplares disponibles",
+                  font=("Arial", 8, "italic"), foreground="gray")\
+            .grid(row=3, column=0, columnspan=2, pady=2)
+
+        def guardar_reserva():
+            cedula = entry_cedula.get().strip()
+            isbn = entry_isbn.get().strip()
+
+            if not cedula or not isbn:
+                messagebox.showerror("Error", "Cedula e ISBN son obligatorios",
+                                     parent=ventana)
+                return
+
+            try:
+                fecha = str(date.today())
+                self.__reserva_repo.insertar(cedula, isbn, fecha)
+                messagebox.showinfo("Exito", "Reserva registrada correctamente",
+                                    parent=ventana)
+                ventana.destroy()
+            except Exception as e:
+                messagebox.showerror("Error BD", str(e), parent=ventana)
+
+        ttk.Button(frame, text="Guardar Reserva", command=guardar_reserva)\
+            .grid(row=4, column=0, columnspan=2, pady=15)
+
+    # PASO #17 VER RESERVAS
     def ver_reservas(self):
-        messagebox.showinfo("Reservas", "Funcionalidad en construccion")
+        """Muestra tabla con todas las reservas activas"""
+        ventana = tk.Toplevel(self.root)
+        ventana.title("Lista de Reservas")
+        ventana.geometry("600x400")
+        ventana.transient(self.root)
+        ventana.grab_set()
+
+        ttk.Label(ventana, text="RESERVAS ACTIVAS", font=("Arial", 14, "bold"))\
+            .pack(pady=10)
+
+        frame = ttk.Frame(ventana, padding=10)
+        frame.pack(fill=tk.BOTH, expand=True)
+
+        scroll_y = ttk.Scrollbar(frame, orient=tk.VERTICAL)
+        scroll_x = ttk.Scrollbar(frame, orient=tk.HORIZONTAL)
+
+        tree = ttk.Treeview(frame,
+                            columns=("id", "cedula", "isbn", "fecha", "activa"),
+                            show="headings",
+                            yscrollcommand=scroll_y.set,
+                            xscrollcommand=scroll_x.set)
+
+        scroll_y.config(command=tree.yview)
+        scroll_x.config(command=tree.xview)
+
+        tree.heading("id", text="ID")
+        tree.heading("cedula", text="Cedula Socio")
+        tree.heading("isbn", text="ISBN")
+        tree.heading("fecha", text="Fecha Reserva")
+        tree.heading("activa", text="Activa")
+
+        tree.column("id", width=50)
+        tree.column("cedula", width=120)
+        tree.column("isbn", width=120)
+        tree.column("fecha", width=130)
+        tree.column("activa", width=70)
+
+        tree.grid(row=0, column=0, sticky="nsew")
+        scroll_y.grid(row=0, column=1, sticky="ns")
+        scroll_x.grid(row=1, column=0, sticky="ew")
+        frame.grid_rowconfigure(0, weight=1)
+        frame.grid_columnconfigure(0, weight=1)
+
+        try:
+            reservas = self.__reserva_repo.listar_activas()
+            for r in reservas:
+                activa_texto = "Si" if r[4] == 1 else "No"
+                tree.insert("", tk.END, values=(r[0], r[1], r[2], r[3], activa_texto))
+        except Exception as e:
+            messagebox.showerror("Error BD", str(e), parent=ventana)
 
     # PASO #18 INICIAR LA APLICACION
     def run(self):

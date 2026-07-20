@@ -161,18 +161,83 @@ def probar_estructuras():
 
 
 def probar_database():
-    """Prueba: conexion a SQLite y creacion de tablas"""
+    """Prueba: conexion a SQLite, CRUD prestamos y reservas"""
     print("\n=== PRUEBA: Base de Datos SQLite ===")
     from src.database.db_manager import DatabaseManager
+    from src.database.socio_repo import SocioRepository
+    from src.database.libro_repo import LibroRepository
+    from src.database.prestamo_repo import PrestamoRepository
+    from src.database.reserva_repo import ReservaRepository
 
     # Usar base de datos en memoria para la prueba
     db = DatabaseManager(":memory:")
     db.connect()
     db.create_tables()
-    db.disconnect()
     print("  Conexion a SQLite: OK")
     print("  Creacion de tablas: OK")
-    print("  NOTA: CRUD completo se probara cuando se implementen los formularios")
+
+    socio_repo = SocioRepository(db)
+    libro_repo = LibroRepository(db)
+    prestamo_repo = PrestamoRepository(db)
+    reserva_repo = ReservaRepository(db)
+
+    # Insertar datos de prueba
+    socio_repo.insertar("1234567890", "Juan", "Perez", "Estudiante", "Computacion", 3, "0999999999")
+    libro_repo.insertar("978-3-16-148410-0", "Python para Todos", "John Doe", "O'Reilly", 2024, 3)
+    print("  Datos de prueba insertados: OK")
+
+    # Probar PrestamoRepository
+    prestamo_repo.insertar("1234567890", "978-3-16-148410-0", "2026-07-20")
+    prestamos = prestamo_repo.listar_todos()
+    assert len(prestamos) == 1, f"Esperado 1 prestamo, obtenido {len(prestamos)}"
+    print(f"  Prestamo creado: ID={prestamos[0][0]}, Pendiente={prestamos[0][3] is None}")
+    assert prestamos[0][3] is None  # fecha_devolucion debe ser NULL
+
+    # Probar listar pendientes
+    pendientes = prestamo_repo.listar_pendientes()
+    assert len(pendientes) == 1
+    print("  Listar prestamos pendientes: OK")
+
+    # Probar registrar devolucion
+    prestamo_repo.registrar_devolucion(1, "2026-07-22")
+    prestamo = prestamo_repo.obtener_por_id(1)
+    assert prestamo[3] == "2026-07-22"
+    print(f"  Devolucion registrada: fecha={prestamo[3]}")
+
+    # Pendientes debe estar vacio ahora
+    pendientes = prestamo_repo.listar_pendientes()
+    assert len(pendientes) == 0
+    print("  Listar pendientes despues de devolucion: OK")
+
+    # Probar listar por socio
+    prestamos_socio = prestamo_repo.listar_por_socio("1234567890")
+    assert len(prestamos_socio) == 1
+    print("  Listar prestamos por socio: OK")
+
+    print("  PrestamoRepository CRUD: OK")
+
+    # Probar ReservaRepository
+    reserva_repo.insertar("1234567890", "978-3-16-148410-0", "2026-07-20")
+    activas = reserva_repo.listar_activas()
+    assert len(activas) == 1
+    print(f"  Reserva creada: ID={activas[0][0]}, Activa={activas[0][4]}")
+    assert activas[0][4] == 1  # activa = True
+
+    # Probar cancelar reserva
+    reserva_repo.cancelar(1)
+    activas = reserva_repo.listar_activas()
+    assert len(activas) == 0
+    print("  Cancelar reserva: OK (ya no hay activas)")
+
+    reserva_repo.insertar("1234567890", "978-3-16-148410-0", "2026-07-21")
+    reserva_repo.insertar("1234567890", "978-3-16-148410-0", "2026-07-22")
+    por_libro = reserva_repo.listar_por_libro("978-3-16-148410-0")
+    assert len(por_libro) == 2
+    print("  Listar reservas por libro (cola FIFO): OK")
+
+    print("  ReservaRepository CRUD: OK")
+
+    db.disconnect()
 
 
 if __name__ == "__main__":

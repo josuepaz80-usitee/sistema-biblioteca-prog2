@@ -435,6 +435,255 @@ Defensa oral           |       |        |        |   ●
 
 ---
 
-> **Documento de Especificación — Avance 50%**
+|> **Documento de Especificación — Avance 100% (Entrega Final)**
 > *Grupo #1 — Lenguaje de Programación 2 — UAE*
-> *Última actualización: 11 de julio de 2026*
+> *Última actualización: 20 de julio de 2026*
+
+---
+
+## 10. Implementación
+
+### 10.1 Estructura del proyecto
+
+```
+sistema-biblioteca-prog2/
+├── main.py                        # Punto de entrada
+├── README.md                      # Descripción general
+├── DECLARATORIA.md                 # Uso de IA + referencias APA
+├── seed.py                        # Poblado de BD con datos de prueba
+├── .gitignore
+├── src/
+│   ├── models/                    # Modelos POO del dominio
+│   │   ├── persona.py             #   Clase abstracta base
+│   │   ├── estudiante.py          #   Herencia de Persona
+│   │   ├── docente.py             #   Herencia de Persona
+│   │   ├── libro.py               #   Lógica préstamo/devolución
+│   │   ├── socio.py               #   Wrapper polimórfico
+│   │   ├── prestamo.py            #   Modelo de préstamo
+│   │   └── reserva.py             #   Modelo de reserva
+│   ├── data_structures/           # Estructuras de datos
+│   │   ├── linked_list.py         #   Lista enlazada simple
+│   │   ├── queue.py               #   Cola FIFO (reservas)
+│   │   └── stack.py               #   Pila LIFO (undo)
+│   ├── algorithms/                # Algoritmos
+│   │   ├── sorting.py             #   Bubble, Insertion, Merge, Quick
+│   │   └── search.py              #   Búsqueda lineal y binaria
+│   ├── database/                  # Base de datos SQLite
+│   │   ├── db_manager.py          #   Conexión y creación de tablas
+│   │   ├── socio_repo.py          #   CRUD socios
+│   │   ├── libro_repo.py          #   CRUD libros
+│   │   ├── prestamo_repo.py       #   CRUD préstamos
+│   │   └── reserva_repo.py        #   CRUD reservas
+│   └── gui/                       # Interfaz gráfica
+│       └── app.py                 #   Tkinter (funcionalidades completas)
+├── tests/
+│   └── test_models.py             # Pruebas unitarias de todos los módulos
+├── docs/
+│   ├── especificacion-proyecto.md # Documento visible en GitHub
+│   ├── especificacion-proyecto.docx # Para entrega Moodle
+│   ├── especificacion-proyecto.pdf  # Backup PDF
+│   ├── manual-usuario.md          # Manual de usuario
+│   ├── gantt.png                  # Diagrama de Gantt
+│   └── README.md                  # Índice de documentos
+└── db/
+    └── biblioteca.db             # Base de datos poblada
+```
+
+### 10.2 Fragmentos de código representativos
+
+#### Clase abstracta Persona (src/models/persona.py)
+
+```python
+# PASO #1 CLASE ABSTRACTA PERSONA
+# Encapsulamiento: atributos privados con getters/setters
+# Abstraccion: metodo tipo_socio() debe ser implementado por subclases
+class Persona:
+    def __init__(self, cedula, nombre, apellido):
+        self.__cedula = cedula
+        self.__nombre = nombre
+        self.__apellido = apellido
+
+    def get_cedula(self):
+        return self.__cedula
+
+    def get_nombre(self):
+        return self.__nombre
+
+    def get_apellido(self):
+        return self.__apellido
+
+    def get_nombre_completo(self):
+        return self.__nombre + " " + self.__apellido
+
+    # PASO #2 METODO ABSTRACTO (polimorfismo)
+    def tipo_socio(self):
+        raise NotImplementedError
+```
+
+#### Herencia: Estudiante (src/models/estudiante.py)
+
+```python
+# PASO #3 CLASE ESTUDIANTE HEREDA DE PERSONA
+class Estudiante(Persona):
+    def __init__(self, cedula, nombre, apellido, carrera, semestre):
+        # PASO #4 LLAMAR AL CONSTRUCTOR DE LA CLASE PADRE
+        super().__init__(cedula, nombre, apellido)
+        self.__carrera = carrera
+        self.__semestre = semestre
+
+    def get_carrera(self):
+        return self.__carrera
+
+    def get_semestre(self):
+        return self.__semestre
+
+    # PASO #5 POLIMORFISMO: CADA SUBCLASE IMPLEMENTA SU PROPIO TIPO
+    def tipo_socio(self):
+        return "Estudiante"
+```
+
+#### CRUD Socios (src/database/socio_repo.py)
+
+```python
+# PASO #6 REPOSITORIO DE SOCIOS
+class SocioRepository:
+    def __init__(self, db):
+        self.__db = db
+
+    # PASO #7 INSERTAR SOCIO
+    def insertar(self, cedula, nombre, apellido, tipo,
+                 carrera_depto, semestre, telefono):
+        cursor = self.__db.get_cursor()
+        cursor.execute(
+            """INSERT INTO socios(cedula, nombre, apellido, tipo,
+               carrera_departamento, semestre, telefono)
+               VALUES(?, ?, ?, ?, ?, ?, ?)""",
+            (cedula, nombre, apellido, tipo, carrera_depto, semestre, telefono)
+        )
+        self.__db.get_connection().commit()
+```
+
+#### GUI — Préstamo (src/gui/app.py)
+
+```python
+# PASO #13 REALIZAR PRESTAMO
+def realizar_prestamo(self):
+    ventana = tk.Toplevel(self.root)
+    ventana.title("Realizar Prestamo")
+    ventana.geometry("480x350")
+
+    # ... formulario con Entry para cedula e ISBN ...
+    def guardar_prestamo():
+        # Validar socio
+        socio = self.__socio_repo.obtener_por_cedula(cedula)
+        # Validar libro y disponibilidad
+        libro = self.__libro_repo.obtener_por_isbn(isbn)
+        if libro[6] < 1:
+            # No hay disponibles
+            return
+        # Registrar prestamo y reducir disponibles
+        self.__prestamo_repo.insertar(cedula, isbn, fecha)
+        self.__libro_repo.actualizar_disponibles(isbn, libro[6] - 1)
+```
+
+---
+
+## 11. Análisis de Complejidad (Big-O)
+
+| Algoritmo | Mejor caso | Caso promedio | Peor caso | Espacio |
+|-----------|:----------:|:-------------:|:---------:|:-------:|
+| **Bubble Sort** | O(n) | O(n²) | O(n²) | O(1) |
+| **Insertion Sort** | O(n) | O(n²) | O(n²) | O(1) |
+| **Merge Sort** | O(n log n) | O(n log n) | O(n log n) | O(n) |
+| **Quick Sort** | O(n log n) | O(n log n) | O(n²) | O(log n) |
+| **Búsqueda Lineal** | O(1) | O(n) | O(n) | O(1) |
+| **Búsqueda Binaria** | O(1) | O(log n) | O(log n) | O(1) |
+
+**Explicación:** Bubble Sort e Insertion Sort son O(n²) en el peor caso porque comparan cada elemento con todos los demás. Merge Sort divide la lista en mitades recursivamente (log n niveles) y en cada nivel fusiona n elementos, dando O(n log n). Quick Sort promedia O(n log n) pero puede degenerar a O(n²) si el pivote es mal elegido. Búsqueda Lineal recorre toda la lista (O(n)), mientras que Búsqueda Binaria divide el espacio de búsqueda a la mitad en cada paso (O(log n)).
+
+---
+
+## 12. Pruebas Realizadas
+
+Todas las pruebas se ejecutan con `python tests/test_models.py` y cubren:
+
+| Módulo | Prueba | Resultado |
+|--------|--------|:---------:|
+| Persona / Estudiante / Docente | Herencia: crear objetos, getters | ✅ Pasa |
+| Socio | Polimorfismo: tipo_socio() distinto según clase | ✅ Pasa |
+| Libro | Préstamo y devolución de ejemplares | ✅ Pasa |
+| Algoritmos | Bubble, Insertion, Merge, Quick Sort | ✅ Pasan |
+| Algoritmos | Búsqueda lineal y binaria | ✅ Pasan |
+| LinkedList | Append, prepend, remove, len | ✅ Pasa |
+| Queue | Enqueue, dequeue (FIFO) | ✅ Pasa |
+| Stack | Push, pop (LIFO) | ✅ Pasa |
+| Database | Conexión SQLite, creación de tablas | ✅ Pasa |
+| PrestamoRepository | Insertar, listar, registrar devolución | ✅ Pasa |
+| ReservaRepository | Insertar, cancelar, listar por libro | ✅ Pasa |
+
+---
+
+## 13. Conclusiones y Recomendaciones
+
+### Conclusiones
+
+1. Se implementó un sistema de gestión bibliotecaria funcional que cumple con todos los requisitos de la rúbrica de evaluación.
+2. La programación orientada a objetos permitió modelar el dominio (Persona → Estudiante, Docente) con herencia, encapsulamiento y polimorfismo.
+3. Las estructuras de datos (LinkedList, Queue, Stack) se implementaron manualmente, demostrando comprensión de su funcionamiento interno.
+4. Los algoritmos de ordenamiento y búsqueda se implementaron desde cero, con análisis de complejidad Big-O.
+5. SQLite proporcionó una base de datos ligera y embebida con 4 tablas relacionadas mediante claves foráneas.
+6. Tkinter permitió construir una interfaz gráfica funcional conectada a la base de datos con formularios CRUD completos.
+7. El modelo incremental permitió entregar un avance del 50% en la Semana 12 y completar el sistema en la Semana 14.
+
+### Recomendaciones
+
+- Migrar a una base de datos cliente-servidor (MySQL/PostgreSQL) si la biblioteca crece.
+- Agregar autenticación de usuarios (bibliotecario/admin) para seguridad.
+- Implementar búsqueda avanzada con múltiples filtros simultáneos.
+- Generar reportes estadísticos (libros más prestados, multas, etc.).
+- Agregar una interfaz web para consultas desde dispositivos móviles.
+
+---
+
+## 14. Bibliografía (APA 7ª ed.)
+
+1. Grayson, J. E. (2000). *Python and Tkinter programming*. Manning Publications. ISBN: 978-1884779813
+
+2. Lutz, M. (2013). *Learning Python* (5.ª ed.). O'Reilly Media. ISBN: 978-1449355739
+
+3. Owens, M. y Allen, G. (2010). *SQLite* (The Definitive Guide). Apress. ISBN: 978-1430232254
+
+4. Cormen, T. H., Leiserson, C. E., Rivest, R. L. y Stein, C. (2009). *Introduction to Algorithms* (3.ª ed.). MIT Press. ISBN: 978-0262033848
+
+5. Sedgewick, R. y Wayne, K. (2011). *Algorithms* (4.ª ed.). Addison-Wesley. ISBN: 978-0321573513
+
+---
+
+## 15. Anexos
+
+### Anexo A — Enlaces del proyecto
+
+| Recurso | URL |
+|---------|-----|
+| Repositorio GitHub | https://github.com/josuepaz80-usitee/sistema-biblioteca-prog2 |
+| Documento de especificación (MD) | `docs/especificacion-proyecto.md` |
+| Manual de usuario | `docs/manual-usuario.md` |
+| Diagrama de Gantt | `docs/gantt.png` |
+
+### Anexo B — Stack tecnológico
+
+| Herramienta | Versión | Uso |
+|-------------|:-------:|-----|
+| Python | 3.11+ | Lenguaje de programación |
+| VS Code | Última | Editor con Python (Microsoft) + GitLens |
+| Tkinter | 8.6 | Interfaz gráfica |
+| SQLite3 | 3.x | Base de datos embebida |
+| DB Browser for SQLite | 3.x | Administración visual BD |
+| Git | 2.47+ | Control de versiones |
+| GitHub | — | Repositorio remoto (colaboración grupal) |
+
+---
+
+> *Documento de Especificación — Versión 1.0 (Entrega Final)*
+> *Grupo #1 — Lenguaje de Programación 2 — 3er Semestre — UAE*
+> *20 de julio de 2026*
