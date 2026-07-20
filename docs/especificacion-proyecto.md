@@ -78,17 +78,17 @@ La POO es un paradigma de programación que organiza el código en clases y obje
 
 ### 5.2 Estructuras de Datos
 
-#### 5.2.1 Lista Enlazada Simple
+**5.2.1 Lista Enlazada Simple**
 
 Estructura lineal donde cada elemento (nodo) contiene un valor y un puntero al siguiente nodo. Permite inserciones y eliminaciones sin reorganizar memoria. Se implementó `LinkedList` como base para la cola y la pila.
 
 **Referencia:** Weiss, M. A. (2013). *Estructuras de datos y algoritmos* (4ª ed.). Pearson Educación.
 
-#### 5.2.2 Cola (Queue — FIFO)
+**5.2.2 Cola (Queue — FIFO)**
 
 El primer elemento en entrar es el primero en salir (First In, First Out). Se utiliza para gestionar las reservas de libros en orden de llegada.
 
-#### 5.2.3 Pila (Stack — LIFO)
+**5.2.3 Pila (Stack — LIFO)**
 
 El último elemento en entrar es el primero en salir (Last In, First Out). Se utiliza para deshacer operaciones (undo) de préstamos y devoluciones.
 
@@ -96,7 +96,7 @@ El último elemento en entrar es el primero en salir (Last In, First Out). Se ut
 
 ### 5.3 Algoritmos de Ordenamiento y Búsqueda
 
-#### 5.3.1 Algoritmos de Ordenamiento
+**5.3.1 Algoritmos de Ordenamiento**
 
 | Algoritmo | Complejidad | Descripción |
 |-----------|:-----------:|-------------|
@@ -105,7 +105,7 @@ El último elemento en entrar es el primero en salir (Last In, First Out). Se ut
 | Merge Sort | O(n log n) | Divide la lista en mitades, las ordena recursivamente y las fusiona |
 | Quick Sort | O(n log n) promedio | Selecciona un pivote y particiona en menores y mayores |
 
-#### 5.3.2 Algoritmos de Búsqueda
+**5.3.2 Algoritmos de Búsqueda**
 
 | Algoritmo | Complejidad | Requisito |
 |-----------|:-----------:|-----------|
@@ -147,8 +147,8 @@ Se utiliza el **Modelo Incremental**, que consiste en desarrollar el sistema por
 | Incremento | Semana | Entregable | Estado |
 |:-----------:|:------:|------------|:------:|
 | **Incremento 1** | Semana 12 (7-10 jul) | Modelo de clases POO + Estructuras de datos + Algoritmos + Esquema BD + GUI (stubs) + Documento de Especificación (50%) | ✅ Completado |
-| **Incremento 2** | Semana 13 (13-17 jul) | GUI funcional completa + BD poblada + CRUD completo + Pruebas unitarias + Manual de Usuario | ⏳ Pendiente |
-| **Incremento 3** | Semana 14 (20 jul) | Integración final + Pruebas de sistema + Documento completo (100%) + Defensa oral | ⏳ Pendiente |
+| **Incremento 2** | Semana 13 (13-17 jul) | GUI funcional completa + BD poblada + CRUD completo + Pruebas unitarias + Manual de Usuario | ✅ Completado |
+| **Incremento 3** | Semana 14 (20 jul) | Integración final + Pruebas de sistema + Documento completo (100%) + Formato PDF | ✅ Completado |
 
 ### 6.2 Flujo de trabajo
 
@@ -479,7 +479,7 @@ sistema-biblioteca-prog2/
 
 ### 10.2 Fragmentos de código representativos
 
-#### Clase abstracta Persona (src/models/persona.py)
+**Clase abstracta Persona (src/models/persona.py)**
 
 ```python
 # PASO #1 CLASE ABSTRACTA PERSONA
@@ -508,7 +508,7 @@ class Persona:
         raise NotImplementedError
 ```
 
-#### Herencia: Estudiante (src/models/estudiante.py)
+**Herencia: Estudiante (src/models/estudiante.py)**
 
 ```python
 # PASO #3 CLASE ESTUDIANTE HEREDA DE PERSONA
@@ -530,7 +530,7 @@ class Estudiante(Persona):
         return "Estudiante"
 ```
 
-#### CRUD Socios (src/database/socio_repo.py)
+**CRUD Socios (src/database/socio_repo.py)**
 
 ```python
 # PASO #6 REPOSITORIO DE SOCIOS
@@ -551,7 +551,7 @@ class SocioRepository:
         self.__db.get_connection().commit()
 ```
 
-#### GUI — Préstamo (src/gui/app.py)
+**GUI — Préstamo (src/gui/app.py)**
 
 ```python
 # PASO #13 REALIZAR PRESTAMO
@@ -783,7 +783,7 @@ Todas las pruebas se ejecutan con `python tests/test_models.py` y cubren:
 
 ### 16.1 Anexo A — Estructura y datos de la base de datos
 
-#### Esquema SQL (DDL)
+**Esquema SQL (DDL)**
 
 ```sql
 CREATE TABLE socios(
@@ -827,7 +827,7 @@ CREATE TABLE reservas(
 );
 ```
 
-#### Datos de prueba (7 socios + 8 libros)
+**Datos de prueba (7 socios + 8 libros)**
 
 **socios:**
 | cedula | nombre | apellido | tipo | carrera_departamento | semestre |
