@@ -1,33 +1,3 @@
-# Sistema de Gestión de Biblioteca Universitaria
-
-**Documento de Especificación del Proyecto**
-
-| | |
-|---|---|
-| **Asignatura** | Lenguaje de Programación 2 |
-| **Docente** | Ing. Bryan Vélez M.Sc. |
-| **Grupo** | #1 |
-| **Semestre** | Tercero — Modalidad en Línea |
-| **Universidad** | Universidad Agraria del Ecuador (UAE) |
-| **Fecha** | Julio 2026 |
-
----
-
-## Índice
-
-1. [Introducción](#1-introducción)
-2. [Justificación](#2-justificación)
-3. [Objetivos](#3-objetivos)
-4. [Alcance](#4-alcance)
-5. [Marco Teórico](#5-marco-teórico)
-6. [Metodología de Desarrollo](#6-metodología-de-desarrollo)
-7. [Diseño Preliminar](#7-diseño-preliminar)
-8. [Distribución del Trabajo](#8-distribución-del-trabajo)
-9. [Repositorio y Control de Versiones](#9-repositorio-y-control-de-versiones)
-10. [Plan de Trabajo y Cronograma](#10-plan-de-trabajo-y-cronograma)
-
----
-
 ## 1. Introducción
 
 Las bibliotecas universitarias enfrentan el desafío de gestionar eficientemente sus recursos bibliográficos: registro de socios, control de préstamos, devoluciones y reservas. Actualmente, muchas bibliotecas pequeñas y medianas aún utilizan métodos manuales o sistemas genéricos que no se adaptan a sus necesidades específicas.
@@ -370,7 +340,7 @@ El proyecto se aloja en GitHub bajo el control de versiones Git.
 
 ---
 
-## 9.1 Plan de Trabajo y Cronograma
+### 9.1 Plan de Trabajo y Cronograma
 
 ### 9.1.1 Diagrama de Gantt
 
