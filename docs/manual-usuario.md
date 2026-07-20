@@ -38,9 +38,52 @@ El sistema fue desarrollado utilizando:
 ### 2.3 Verificar instalación de Python
 Antes de instalar el sistema, verifique que Python esté correctamente instalado:
 
-1. Abra una terminal (CMD en Windows, Terminal en macOS/Linux)
+1. Abrir una terminal (CMD en Windows, Terminal en macOS/Linux)
 2. Escriba: `python --version`
 3. Debe mostrar: `Python 3.11.x` o superior
+
+---
+
+## 3. Instalación
+
+### 3.1 Descargar el proyecto
+
+**Opción 1 — Clonar con Git (recomendado):**
+```bash
+git clone https://github.com/josuepaz80-usitee/sistema-biblioteca-prog2.git
+cd sistema-biblioteca-prog2
+```
+
+**Opción 2 — Descargar ZIP:**
+1. Ir a https://github.com/josuepaz80-usitee/sistema-biblioteca-prog2
+2. Hacer clic en el botón verde **"<> Code"** → **"Download ZIP"**
+3. Descomprimir el archivo en una carpeta de su PC
+
+### 3.2 Crear la base de datos
+
+Ejecute el siguiente comando en la terminal dentro de la carpeta del proyecto:
+
+```bash
+python seed.py
+```
+
+Este comando crea el archivo `db/biblioteca.db` con:
+- 7 socios de prueba (estudiantes y docentes)
+- 8 libros en el catálogo
+- Sin préstamos ni reservas registrados
+
+### 3.3 Iniciar el sistema
+
+```bash
+python main.py
+```
+
+Aparecerá la ventana principal del sistema lista para usar.
+
+> **Nota:** Si aparece un error de `ModuleNotFoundError: No module named 'tkinter'`, instale Tkinter:
+> - **Windows/macOS:** Viene incluido con Python. Reinstale Python y asegúrese de marcar la casilla "tcl/tk and IDLE".
+> - **Linux (Debian/Ubuntu):** `sudo apt install python3-tk`
+> - **Linux (Fedora):** `sudo dnf install python3-tkinter`
 
 ---
 
@@ -112,7 +155,7 @@ Al ejecutar `main.py`, se muestra la ventana principal del sistema. Esta ventana
 └─────────────────────────────────────────────────────┘
 ```
 
-**![Captura de pantalla: Pantalla principal](manual-capturas/01-pantalla-principal.png)**
+**![Pantalla principal](manual-capturas/01-pantalla-principal.png)**
 *Imagen 1: Pantalla principal del sistema con menú superior y panel de acceso rápido.*
 
 #### Barra de menú
@@ -161,7 +204,7 @@ La pantalla principal incluye botones de acceso rápido para las operaciones má
 3. Haga clic en **Guardar Socio**.
 4. Aparecerá un mensaje de confirmación: *"Socio registrado correctamente"*.
 
-**![Captura de pantalla: Formulario registrar socio](manual-capturas/02-registrar-socio.png)**
+**![Formulario registrar socio](manual-capturas/02-registrar-socio.png)**
 *Imagen 2: Formulario para registrar un nuevo socio.*
 
 #### Listar socios registrados
@@ -171,7 +214,7 @@ La pantalla principal incluye botones de acceso rápido para las operaciones má
 3. La tabla incluye: Cédula, Nombre, Apellido, Tipo (Estudiante/Docente), Carrera/Depto. y Teléfono.
 4. Use las barras de desplazamiento para ver todos los registros.
 
-**![Captura de pantalla: Lista de socios](manual-capturas/03-listar-socios.png)**
+**![Lista de socios](manual-capturas/03-listar-socios.png)**
 *Imagen 3: Ventana con la lista de socios registrados.*
 
 ---
@@ -195,7 +238,7 @@ La pantalla principal incluye botones de acceso rápido para las operaciones má
 3. Haga clic en **Guardar Libro**.
 4. Aparecerá un mensaje de confirmación: *"Libro agregado correctamente"*.
 
-**![Captura de pantalla: Formulario agregar libro](manual-capturas/04-agregar-libro.png)**
+**![Formulario agregar libro](manual-capturas/04-agregar-libro.png)**
 *Imagen 4: Formulario para agregar un nuevo libro al catálogo.*
 
 #### Ver catálogo de libros
@@ -205,7 +248,7 @@ La pantalla principal incluye botones de acceso rápido para las operaciones má
 3. La tabla incluye: ISBN, Título, Autor, Editorial, Año, Ejemplares totales y Disponibles.
 4. Los campos "Disponibles" se actualizan automáticamente al realizar préstamos o devoluciones.
 
-**![Captura de pantalla: Catálogo de libros](manual-capturas/05-ver-catalogo.png)**
+**![Catálogo de libros](manual-capturas/05-ver-catalogo.png)**
 *Imagen 5: Ventana con el catálogo completo de libros.*
 
 ---
@@ -228,7 +271,7 @@ La pantalla principal incluye botones de acceso rápido para las operaciones má
 
 > **Importante:** Si el libro no tiene ejemplares disponibles, el sistema mostrará un mensaje de error. En ese caso, puede crear una reserva (ver sección 4.5).
 
-**![Captura de pantalla: Formulario realizar préstamo](manual-capturas/06-realizar-prestamo.png)**
+**![Formulario realizar préstamo](manual-capturas/06-realizar-prestamo.png)**
 *Imagen 6: Formulario para registrar un préstamo.*
 
 #### Registrar una devolución
@@ -249,7 +292,7 @@ La pantalla principal incluye botones de acceso rápido para las operaciones má
 3. La tabla incluye: ID, Cédula del Socio, ISBN, Fecha de Préstamo y Fecha de Devolución.
 4. Los préstamos pendientes muestran "Pendiente" en la columna de fecha de devolución.
 
-**![Captura de pantalla: Lista de préstamos](manual-capturas/07-ver-prestamos.png)**
+**![Lista de préstamos](manual-capturas/07-ver-prestamos.png)**
 *Imagen 7: Ventana con el historial de préstamos.*
 
 ---
@@ -266,7 +309,7 @@ La pantalla principal incluye botones de acceso rápido para las operaciones má
 4. Un mensaje confirmará: *"Reserva registrada correctamente"*.
 5. La reserva queda en estado "Activa" hasta que se cancele manualmente.
 
-**![Captura de pantalla: Formulario nueva reserva](manual-capturas/08-nueva-reserva.png)**
+**![Formulario nueva reserva](manual-capturas/08-nueva-reserva.png)**
 *Imagen 8: Formulario para crear una nueva reserva.*
 
 #### Ver reservas activas
