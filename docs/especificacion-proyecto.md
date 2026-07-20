@@ -266,59 +266,9 @@ El proyecto se aloja en GitHub bajo el control de versiones Git.
 
 ### 9.1.1 Diagrama de Gantt
 
-```
-Julio 2026
-────────────────────────────────────────────────────────────
-Actividad              | Lun 7 | Sem 12 | Sem 13 | Sem 14
-                       | a jue | 10 jul | 13-17  | 20 jul
-                       | 10    |        |        |
-────────────────────────────────────────────────────────────
-Inicio del proyecto    | █████ |  ████  |        |
-(planificación, repo)  |       |        |        |
-                       |       |        |        |
-Modelos POO            | █████ |  ████  |        |
-(clases, herencia,     |       |        |        |
-encapsulamiento)       |       |        |        |
-                       |       |        |        |
-Estructuras de datos   | █████ |  ████  |        |
-(lista, cola, pila)    |       |        |        |
-                       |       |        |        |
-Algoritmos             | █████ |  ████  |        |
-(búsqueda, ordenamiento)|       |       |        |
-                       |       |        |        |
-Base de datos SQLite   | █████ |  ████  |        |
-(tablas, CRUD)         |       |        |        |
-                       |       |        |        |
-GUI Tkinter (stubs)    | █████ |  ████  |        |
-                       |       |        |        |
-Documento Especificación| █████|  ████  | ██████ |
-(100%)                 |       |        |        |
-                       |       |        |        |
-─── ENTREGA TAREA 12 ──|       |   ●    |        |
-                       |       | 11 jul |        |
-                       |       |        |        |
-GUI funcional completa |       |        | ██████ | ███
-(formularios CRUD)     |       |        |        |
-                       |       |        |        |
-BD poblada + reports   |       |        | ██████ | ███
-(socios, libros)       |       |        |        |
-                       |       |        |        |
-Pruebas unitarias      |       |        | ██████ | ███
-(11 tests)             |       |        |        |
-                       |       |        |        |
-Manual de usuario      |       |        | ██████ | ███
-(8 capturas pantalla)  |       |        |        |
-                       |       |        |        |
-Formato PDF académico  |       |        |        | ████
-(documento final)      |       |        |        |
-                       |       |        |        |
-─── ENTREGA FINAL ──── |       |        |        |   ●
-                       |       |        |        | 20 jul
-                       |       |        |        |
-Defensa oral           |       |        |        |   →
-(Semana 15)            |       |        |        | 27 jul
-────────────────────────────────────────────────────────────
-```
+![Diagrama de Gantt](diagramas/gantt-proyecto.png)
+
+*Diagrama 3: Cronograma del proyecto mostrando las 14 actividades distribuidas en las semanas 12 a 15 de julio de 2026, con hitos de entrega y defensa.*
 
 ### 9.1.2 Estado Final del Proyecto
 
