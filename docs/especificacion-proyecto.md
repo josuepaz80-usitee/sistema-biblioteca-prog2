@@ -184,6 +184,8 @@ Se utiliza el **Modelo Incremental**, que consiste en desarrollar el sistema por
 
 *Diagrama 2: Modelo entidad-relación de la base de datos mostrando las 4 tablas (socios, libros, prestamos, reservas), sus atributos, tipos de datos, claves primarias (PK) y foráneas (FK), y las relaciones 1:N entre ellas.*
 
+> **Nota de diseño:** El modelo presentado es una versión simplificada para fines académicos. En un entorno productivo, `carrera_departamento` y `tipo` en socios, así como `autor` en libros, se normalizarían en tablas separadas (carreras, tipos_socio, autores) para evitar redundancia.
+
 Las relaciones del modelo son:
 
 | Entidad A | Relación | Entidad B | Descripción |
@@ -655,6 +657,7 @@ CREATE TABLE reservas(
 **Datos de prueba (7 socios + 8 libros)**
 
 **socios:**
+
 | cedula | nombre | apellido | tipo | carrera_departamento | semestre |
 |--------|--------|----------|------|---------------------|:--------:|
 | 0956789012 | Henry | Pazmino | Estudiante | Computacion | 3 |
@@ -666,6 +669,7 @@ CREATE TABLE reservas(
 | 0912345679 | Bryan | Velez | Docente | Computacion | — |
 
 **libros:**
+
 | isbn | titulo | autor | ejemplares | disponibles |
 |------|--------|-------|:----------:|:-----------:|
 | 978-0307474728 | Cien Años de Soledad | G. García Márquez | 3 | 3 |
