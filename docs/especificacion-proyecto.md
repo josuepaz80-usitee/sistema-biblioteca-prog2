@@ -229,6 +229,9 @@ El proyecto se aloja en GitHub bajo el control de versiones Git.
 
 ### 9.2 Historial de Commits
 
+
+El historial refleja la evolucion del proyecto desde la estructura inicial (commit #2) hasta la entrega final (#20). Los primeros commits establecieron el modelo POO y la declaratoria de uso de IA. A partir del commit #6 se agrego la documentacion completa del proyecto. Los commits #10-#14 documentan el trabajo de base de datos de Cindy y las capturas del manual de Mayra. Los commits #15-#20 corresponden a correcciones de formato y la generacion final de PDF con estandar academico.
+
 | # | Fecha | Hash | Mensaje |
 |:-:|:-----:|:----:|---------|
 | 1 | 7 jul | `0e78b3a` | `Initial commit` |
@@ -455,44 +458,10 @@ def realizar_prestamo(self):
 
 ### 12.1 Modelo Entidad-Relación
 
-```
-┌──────────────────┐         ┌──────────────────┐
-│     socios       │         │     libros       │
-├──────────────────┤         ├──────────────────┤
-│PK cedula: TEXT   │         │PK isbn: TEXT     │
-│ nombre: TEXT     │         │ titulo: TEXT     │
-│ apellido: TEXT   │         │ autor: TEXT      │
-│ tipo: TEXT       │         │ editorial: TEXT  │
-│ carrera_depto:  │         │ anio: INTEGER    │
-│   TEXT           │         │ ejemplares: INT  │
-│ semestre: INT    │         │ disponibles: INT │
-│ telefono: TEXT   │         └────────┬─────────┘
-└────────┬─────────┘                   │
-         │                            │
-         │ 1                          │ 1
-         │                            │
-         │ FK                         │ FK
-         ▼                            ▼
-┌──────────────────────────────────────────────┐
-│               prestamos                       │
-├──────────────────────────────────────────────┤
-│PK id: INTEGER AUTOINCREMENT                  │
-│FK cedula_socio → socios(cedula)              │
-│FK isbn_libro → libros(isbn)                  │
-│ fecha_prestamo: TEXT NOT NULL                 │
-│ fecha_devolucion: TEXT (NULL = pendiente)     │
-└──────────────────────────────────────────────┘
+![Diagrama Entidad-Relacion](diagramas/diagrama-er-bd.png)
 
-┌──────────────────────────────────────────────┐
-│               reservas                        │
-├──────────────────────────────────────────────┤
-│PK id: INTEGER AUTOINCREMENT                  │
-│FK cedula_socio → socios(cedula)              │
-│FK isbn_libro → libros(isbn)                  │
-│ fecha_reserva: TEXT NOT NULL                  │
-│ activa: INTEGER DEFAULT 1                     │
-└──────────────────────────────────────────────┘
-```
+*Diagrama 5: Modelo Entidad-Relacion del sistema con las tablas socios, libros, prestamos y reservas.*
+
 
 *Nota: Cada socio puede tener 0 o muchos préstamos y 0 o muchas reservas.
 Cada libro puede estar en 0 o muchos préstamos y 0 o muchas reservas.*
