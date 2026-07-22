@@ -241,21 +241,21 @@ El historial refleja la evolucion del proyecto desde la estructura inicial (comm
 | 3 | 8 jul | `eaf6cae` | `refactor: estilo nivel 3er semestre segun lo ensenado por Ing. Bryan Velez + DECLARATORIA` |
 | 4 | 9 jul | `7f9e535` | `fix: DECLARATORIA actualizada tras revision completa del material del semestre` |
 | 5 | 9 jul | `d388507` | `fix: referencias genericas sin nombres individuales en DECLARATORIA` |
-|| 6 | 11 jul | `ac193dd` | `docs: agregar documentacion del proyecto (especificacion, manual, Gantt, README con roles)` |
-|| 7 | 11 jul | `6cf6167` | `docs: especificacion visible en markdown + creditos de autoría por integrante en cada archivo` |
-|| 8 | 11 jul | `2d1e028` | `fix: formato limpio del credito de Mayra en manual-usuario.md` |
-|| 9 | 11 jul | `e8ce1b1` | `fix: actualizar historial de commits y DECLARATORIA (Tkinter + incremental)` |
-|| 10 | 11 jul | `165d556` | `docs: restaurar formato original con logo UAE + commits hasta #10` |
-|| 11 | 11 jul | `8b01d20` | `docs: sincronizar historial de commits en markdown hasta #10` |
-|| 12 | 11 jul | `ee37e02` | `feat: seed de base de datos con datos de prueba (Cindy Ayoví - BD)` |
-|| 13 | 20 jul | `11cf096` | `docs: completar manual de usuario (instalacion, solucion problemas, FAQ)` |
-|| 14 | 20 jul | `f5ee021` | `docs: agregar capturas de pantalla (8) al manual` |
-|| 15 | 20 jul | `bdbca88` | `fix: corregir duplicados y numeracion en manual y especificacion` |
-|| 16 | 20 jul | `5b31576` | `docs: agregar ER diagrama, DDL SQL, consultas SQL, DB Browser guia, Anexos BD` |
-|| 17 | 20 jul | `cd3f461` | `docs: ajustar formato DOCX y PDF con estilos academicos (margenes, header, footer)` |
-|| 18 | 20 jul | `b9799eb` | `docs: portada con logo UAE, header/footer Grupo #1` |
-|| 19 | 20 jul | `782f1a5` | `docs: arreglar formato PDF - portada compacta, tabla elegante, sin duplicados` |
-|| 20 | 20 jul | `782f1a5` | `docs: actualizar Gantt + estado final del proyecto (entrega completa)` |
+| 6 | 11 jul | `ac193dd` | `docs: agregar documentacion del proyecto (especificacion, manual, Gantt, README con roles)` |
+| 7 | 11 jul | `6cf6167` | `docs: especificacion visible en markdown + creditos de autoría por integrante en cada archivo` |
+| 8 | 11 jul | `2d1e028` | `fix: formato limpio del credito de Mayra en manual-usuario.md` |
+| 9 | 11 jul | `e8ce1b1` | `fix: actualizar historial de commits y DECLARATORIA (Tkinter + incremental)` |
+| 10 | 11 jul | `165d556` | `docs: restaurar formato original con logo UAE + commits hasta #10` |
+| 11 | 11 jul | `8b01d20` | `docs: sincronizar historial de commits en markdown hasta #10` |
+| 12 | 11 jul | `ee37e02` | `feat: seed de base de datos con datos de prueba (Cindy Ayoví - BD)` |
+| 13 | 20 jul | `11cf096` | `docs: completar manual de usuario (instalacion, solucion problemas, FAQ)` |
+| 14 | 20 jul | `f5ee021` | `docs: agregar capturas de pantalla (8) al manual` |
+| 15 | 20 jul | `bdbca88` | `fix: corregir duplicados y numeracion en manual y especificacion` |
+| 16 | 20 jul | `5b31576` | `docs: agregar ER diagrama, DDL SQL, consultas SQL, DB Browser guia, Anexos BD` |
+| 17 | 20 jul | `cd3f461` | `docs: ajustar formato DOCX y PDF con estilos academicos (margenes, header, footer)` |
+| 18 | 20 jul | `b9799eb` | `docs: portada con logo UAE, header/footer Grupo #1` |
+| 19 | 20 jul | `782f1a5` | `docs: arreglar formato PDF - portada compacta, tabla elegante, sin duplicados` |
+| 20 | 20 jul | `782f1a5` | `docs: actualizar Gantt + estado final del proyecto (entrega completa)` |
 
 ### 9.3 Stack Tecnológico del Desarrollo
 
